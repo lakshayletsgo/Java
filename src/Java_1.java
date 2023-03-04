@@ -10,6 +10,5 @@ public class Java_1 {
         double f;
         boolean g;
         short h;
-
     }
 }
