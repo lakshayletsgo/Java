@@ -4,17 +4,25 @@ class Student2{
     int Studentid;
 
 //    If we want to set a default value we can use the constructor
-    public Student2(){
+
+ public Student2(){
         name = "Enter-Your-Name-Here";
         Studentid  = 00;
-
     }
     public Student2(String name1){
         name = name1;
     }
+
+
+
+
     public Student2(int Id1){
         Studentid = Id1;
     }
+
+
+
+
     public Student2(String name2, int id1){
         name = name2;
         Studentid = id1;
