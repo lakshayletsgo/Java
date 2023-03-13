@@ -24,13 +24,11 @@ class Employee1{
 public class Java_14 {
     public static void main(String[] args) {
         Employee1 []e1 = new Employee1[4];
-        e1[0] = new Employee1(78000,"Robert",1994,"64c");
-        e1[1] = new Employee1(82000,"Sam",2000,"68D");
-        e1[2] = new Employee1(84000,"John",1999,"26B");
-        e1[3] = new Employee1(79000,"Mohan",2004,"78B");
+        e1[0] = new Employee1(78000,"Robert",1994,"64C-WallStreet");
+        e1[1] = new Employee1(82000,"Sam",2000,"68D-WallStreet");
+        e1[2] = new Employee1(84000,"John",1999,"26B-WallStreet");
         e1[0].display();
         e1[1].display();
         e1[2].display();
-        e1[3].display();
     }
 }
