@@ -6,6 +6,7 @@
 class ThreadingLearning1 extends Thread{
     public void run(){
         int j = 0;
+
         while (j<20){
             j++;
         System.out.println("This is class 1 of thread");
