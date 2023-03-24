@@ -8,6 +8,7 @@
 // Then we have to ovveride the toString and getMessage methods and whenever we throw that class name, it is an exception and we get the toString method first
 
 //At the end what is thrown is an error so it is handled in the catch block
+
 import java.util.Scanner;
 class myException extends Exception{
     @Override
