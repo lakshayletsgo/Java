@@ -3,6 +3,7 @@
 //But we can't use the method of only sub class that are not override
 //We can only use ovveride method and methods of superclass
 // If there is method in super class and it is ovveriden it then we can use the ovvveriden method only
+//Agr hame ek object ko uski sub class se super class me change karna hai toh ham uske type cast kar skte hai
 class Base{
     int a;
     public void name(){
@@ -23,6 +24,13 @@ class Extended extends Base{
 public class Java_20 {
     public static void main(String[] args) {
         Base b1 = new Extended();
+
+        Extended e12;
+        e12 = new Extended();
+        Base b2 = e12;
+        Extended e3 = (Extended) b2;
+
+
 //        Extended1 w1 = new Base(); //This is not allowed, This will give error
         b1.name();
 //        b1.speak(); //This will also give error
