@@ -6,7 +6,6 @@ import java.util.*;
 
 public class LoginPage {
     public static void main() {
-//        System.out.println("Hello world!");
         Scanner sc = new Scanner(System.in);
         Scanner sc2= new Scanner(System.in);
         System.out.println("If you are a new user press N or already existing user press E");
@@ -20,13 +19,12 @@ public class LoginPage {
         try{
 
         FileWriter f1 = new FileWriter("newLoginInfo.txt");
-        f1.write(username);
-        f1.write(":");
-        f1.write(password);
+        f1.write(username+":"+password);
         f1.close();
             System.out.println("Loginned Successfully!!");
              }catch (Exception e){
-                    System.out.println(e);
+                    System.out.println("Error in Login ");
+                    e.printStackTrace();
                                     }
         }
         else{
@@ -58,14 +56,19 @@ public class LoginPage {
                 }else{
                     System.out.println("Loggined Successfully!!");
                 }
+                fileScanner.close();
+                scanner.close();
+
             }
         } catch (FileNotFoundException e) {
             System.out.println("Error: File not found.");
             e.printStackTrace();
         }
 }
-        sc.close();
-        sc2.close();
+//        sc.close();
+//        sc2.close();
+
+
     }
 }
 
