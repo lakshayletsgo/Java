@@ -21,11 +21,12 @@ public class LoginPage {
         FileWriter f1 = new FileWriter("newLoginInfo.txt");
         f1.write(username+":"+password);
         f1.close();
-            System.out.println("Loginned Successfully!!");
-             }catch (Exception e){
-                    System.out.println("Error in Login ");
-                    e.printStackTrace();
-                                    }
+        System.out.println("Loginned Successfully!!");
+            }
+        catch (Exception e){
+            System.out.println("Error in Login ");
+            e.printStackTrace();
+                            }
         }
         else{
             Scanner scanner = new Scanner(System.in);
@@ -56,10 +57,10 @@ public class LoginPage {
                 }else{
                     System.out.println("Loggined Successfully!!");
                 }
-                fileScanner.close();
-                scanner.close();
+//                scanner.close();
 
             }
+            fileScanner.close();
         } catch (FileNotFoundException e) {
             System.out.println("Error: File not found.");
             e.printStackTrace();

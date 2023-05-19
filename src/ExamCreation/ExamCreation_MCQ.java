@@ -22,12 +22,12 @@ public class ExamCreation_MCQ {
         f1.write(q1[0]+":");
         System.out.println("Enter the choices: ");
         for (int i = 0; i < 4; i++) {
-            q1[i + 1] = sc.next();
+            q1[i + 1] = sc.nextLine();
             f1.write(q1[i+1]+":");
 
         }
         System.out.println("Enter the correct option: ");
-        q1[5] = sc2.next();
+        q1[5] = sc2.nextLine();
         f1.write(q1[5]+"\n");
     }
             f1.close();

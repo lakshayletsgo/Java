@@ -19,7 +19,7 @@ public class ExamCreation_Subjective {
             f1.write(q+":");
             System.out.println("Enter the length of the question :");
             int len = sc1.nextInt();
-            f1.write(len+"\n");}
+            f1.write(len+":");}
             f1.close();
         }catch (Exception e){
             System.out.println(e);

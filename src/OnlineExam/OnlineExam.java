@@ -22,7 +22,7 @@ import java.util.*;
             n = scanner.nextInt();
 
         }
-        System.out.println("Question Paper Ready!!");
-        scanner.close();
+        System.out.println("Question Paper Ready!!\n\n\n");
+//        scanner.close();
     }
 }
