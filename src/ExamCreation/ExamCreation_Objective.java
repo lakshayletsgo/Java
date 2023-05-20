@@ -17,14 +17,14 @@ public class ExamCreation_Objective {
                 String q = sc.nextLine();
                 f1.write(q+":");
                 System.out.println("Enter the choices :");
-            String[] ch = new String[2];
-            ch[0] = sc.nextLine();
-            f1.write(ch[0]+":");
-            ch[1] = sc.nextLine();
-            f1.write(ch[1]+":");
-            System.out.println("Enter the correct answer :");
-            String cr = sc.nextLine();
-            f1.write(cr+":");
+                String[] ch = new String[2];
+                ch[0] = sc.nextLine();
+                f1.write(ch[0]+":");
+                ch[1] = sc.nextLine();
+                f1.write(ch[1]+":");
+                System.out.println("Enter the correct answer :");
+                String cr = sc.nextLine();
+                f1.write(cr+":");
 
             }
             f1.close();

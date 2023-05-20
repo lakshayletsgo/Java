@@ -3,7 +3,7 @@ import ExamCreation.*;
 
 import java.util.*;
 
- public class OnlineExam {
+public class OnlineExam {
     public static void main() {
         System.out.println("Enter your choice of question: \n 1.MCQ\n 2.Subjective\n 3.Objective\n 4.Exit");
         Scanner scanner = new Scanner(System.in);
@@ -12,9 +12,9 @@ import java.util.*;
             if(n==1){
                 ExamCreation_MCQ.main();
             } else if (n == 2) {
-                    ExamCreation_Subjective.main();
+                ExamCreation_Subjective.main();
             } else if (n == 3) {
-                    ExamCreation_Objective.main();
+                ExamCreation_Objective.main();
             }else{
                 System.out.println("You have entered wrong choice");
             }

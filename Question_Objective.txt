@@ -1,1 +1,1 @@
-My name is lakshay?::True:False:Name of the college is NorthCap University?:True:False:True:
+Nile is the longest river in the world?:True:False:True:Delhi is the capital of India?:True:False:True:

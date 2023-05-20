@@ -2,63 +2,109 @@ package OnlineExam;
 
 import java.io.File;
 import java.io.FileReader;
-import java.util.Scanner;
+import java.io.FileWriter;
+import java.util.*;
 
 public class ExamTaking {
+
+
+//        return " " ;
+
     public static void main() {
-        Scanner sc = new Scanner(System.in);
+        int y=0;
         try {
-            File f2 = new File("Question_MCQ.txt");
-            Scanner ques2 = new Scanner(f2);
-            while(ques2.hasNextLine()){
+            FileWriter fw = new FileWriter("studentResponse.txt");
+
+
+            Scanner sc5 = new Scanner(System.in);
+//        Scanner sc = new Scanner(System.in);
+            int n = 1;
+            String studentRs;
+
+                File f2 = new File("Question_MCQ.txt");
+//            String [] rs = new String[];
+//            Scanner ans2= new Scanner(fw);
+                Scanner ques2 = new Scanner(f2);
                 String quess2 = ques2.nextLine();
                 String[] parts2 = quess2.split(":");
-                System.out.print("Question: ");
-                System.out.println(parts2[0]);
-                for(int o=0;o<parts2.length-2;o++){
-                    System.out.println((o+1)+"."+parts2[o+1]);
+                while (y<parts2.length) {
+                    System.out.print("Question " + n + ":");
+                    n++;
+                    System.out.println(parts2[y]);
+                    y++;
+                    for (int o = 0; o < 4; o++) {
+                        System.out.println((o + 1) + "." + parts2[y]);
+                        y++;
+                    }
+                    y++;
+                    studentRs = sc5.nextLine();
+                    fw.write(studentRs+":");
+//                    y=y+5;
+//                String []srs5
                 }
-//                ques2.skip("\n");
-            }
-            ques2.close();
-        }catch (Exception e){
-            System.out.println("There is an exception in getting value of MCQ Questions "+e);
-        }
-        try{
-            File f3 = new File("Question_Objective.txt");
-            Scanner ques3 = new Scanner(f3);
-            while (ques3.hasNextLine()){
-                String quess3 = ques3.nextLine();
-                String[] parts3 = quess3.split(":");
-                System.out.print("Question: ");
-                System.out.println(parts3[0]);
-                for(int o=0;o<parts3.length-1;o++){
-                    System.out.println((o+1)+"."+parts3[o+1]);
-                }
-//                ques3.skip("\n");
-            }
-            ques3.close();
+//                fw.close();
+//                sc5.close();
+//                fw.close();
+                ques2.close();
 
-        }catch (Exception e){
-            System.out.println("There is an exception in getting value of Obecjtive Questions");
-        }
-        try{
-            File f1 = new File("Question_Subjective.txt");
-            Scanner ques = new Scanner(f1);
-            while (ques.hasNextLine()){
-                String quess = ques.nextLine();
-                String[] parts = quess.split(":");
-                System.out.print("Question: ");
-                System.out.println(parts[0]);
-                for(int o=0;o<parts.length-2;o++){
-                    System.out.println((o+1)+"."+parts[o+1]);
+
+            try {
+//                FileWriter fw = new FileWriter("studentResponse.txt");
+                File f3 = new File("Question_Objective.txt");
+                Scanner ques3 = new Scanner(f3);
+                String quess3 = ques3.nextLine();
+                int x =0;
+                String[] parts3 = quess3.split(":");
+                while (x<parts3.length) {
+                    ;
+                    System.out.print("Question " + n + ":");
+                    n++;
+                    System.out.println(parts3[x]);
+                    x++;
+                    for (int o = 0; o <2; o++) {
+                        System.out.println((o + 1) + "." + parts3[x]);
+                        x++;
+                    }
+                    x++;
+                    studentRs = sc5.nextLine();
+                    fw.write(studentRs+":");
+//                ques3.skip("\n");
                 }
+//                fw.close();
+                ques3.close();
+
+            } catch (Exception e) {
+                System.out.println("There is an exception in getting value of Obecjtive Questions "+e);
+                e.printStackTrace();
+            }
+
+
+            try {
+                File f1 = new File("Question_Subjective.txt");
+//                FileWriter fw = new FileWriter("studentResponse.txt");
+                Scanner ques = new Scanner(f1);
+                while (ques.hasNextLine()) {
+                    String quess = ques.nextLine();
+                    String[] parts = quess.split(":");
+                    System.out.print("Question " + n + ":");
+//                n++;
+                    System.out.println(parts[0]);
+                    for (int o = 0; o < parts.length - 2; o++) {
+                        System.out.println((o + 1) + "." + parts[o + 1]);
+                    }
+                    studentRs = sc5.nextLine();
+                    fw.write(studentRs+":");
 //                ques.skip("\n");
 
+                }
+                ques.close();
+            } catch (Exception e) {
+                System.out.println("There is an exception in getting value of Subjective Questions "+e);
             }
-            ques.close();
+//        return n;
+            fw.close();
         }catch (Exception e){
-            System.out.println("There is an exception in getting value of Subjective Questions");
+            System.out.println("Exception in writing response  "+ e);
         }
     }
 }

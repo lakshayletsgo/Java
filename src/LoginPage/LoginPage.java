@@ -12,60 +12,60 @@ public class LoginPage {
         char x = sc.next().charAt(0);
         if(x=='N')
         {
-        System.out.print("Create a username :");
-        String username = sc.next();
-        System.out.print("Create a password : ");
-        String password = sc2.nextLine();
-        try{
+            System.out.print("Create a username :");
+            String username = sc.next();
+            System.out.print("Create a password : ");
+            String password = sc2.nextLine();
+            try{
 
-        FileWriter f1 = new FileWriter("newLoginInfo.txt");
-        f1.write(username+":"+password);
-        f1.close();
-        System.out.println("Loginned Successfully!!");
+                FileWriter f1 = new FileWriter("newLoginInfo.txt");
+                f1.write(username+":"+password);
+                f1.close();
+                System.out.println("Loginned Successfully!!");
             }
-        catch (Exception e){
-            System.out.println("Error in Login ");
-            e.printStackTrace();
-                            }
+            catch (Exception e){
+                System.out.println("Error in Login ");
+                e.printStackTrace();
+            }
         }
         else{
             Scanner scanner = new Scanner(System.in);
-        String username, password;
+            String username, password;
 
-        System.out.print("Enter username: ");
-        username = scanner.nextLine();
+            System.out.print("Enter username: ");
+            username = scanner.nextLine();
 
-        System.out.print("Enter password: ");
-        password = scanner.nextLine();
+            System.out.print("Enter password: ");
+            password = scanner.nextLine();
 
-        try {
-            File file = new File("loginInfo.txt");
-            Scanner fileScanner = new Scanner(file);
+            try {
+                File file = new File("loginInfo.txt");
+                Scanner fileScanner = new Scanner(file);
 
-            while (fileScanner.hasNextLine()) {
-                String line = fileScanner.nextLine();
-                String[] parts = line.split(":");
-                String fileUsername = parts[0];
-                String filePassword = parts[1];
+                while (fileScanner.hasNextLine()) {
+                    String line = fileScanner.nextLine();
+                    String[] parts = line.split(":");
+                    String fileUsername = parts[0];
+                    String filePassword = parts[1];
 
-                if (!username.equals(fileUsername)) {
-                    System.out.println("Invalid Username");
-                    return;
-                } else if (!password.equals(filePassword)) {
-                    System.out.println("Invalid Password");
-                    return;
-                }else{
-                    System.out.println("Loggined Successfully!!");
-                }
+                    if (!username.equals(fileUsername)) {
+                        System.out.println("Invalid Username");
+                        return;
+                    } else if (!password.equals(filePassword)) {
+                        System.out.println("Invalid Password");
+                        return;
+                    }else{
+                        System.out.println("Loggined Successfully!!");
+                    }
 //                scanner.close();
 
+                }
+                fileScanner.close();
+            } catch (FileNotFoundException e) {
+                System.out.println("Error: File not found.");
+                e.printStackTrace();
             }
-            fileScanner.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("Error: File not found.");
-            e.printStackTrace();
         }
-}
 //        sc.close();
 //        sc2.close();
 

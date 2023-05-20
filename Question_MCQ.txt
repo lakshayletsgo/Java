@@ -1,2 +1,1 @@
-Name the longest river in the world?:Nile:Brahmputra:Yamuna:Ganga:Nile
-Name the prime minister of India?:Narendra Modi :Barack Obama :Osama Bin la din:Donald Trump:Narendra Modi
+Name the longest river in the world?:Nile:Brahmputra:Ganga:Yamuna:Nile:Name the Prime Minister of India?:Narendra Modi:Donald Trump:Osama Bin La Din:Barack Obama:Narendra Modi:

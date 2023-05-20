@@ -16,13 +16,32 @@ public class Grading2 {
 
         }return number;
     }
-    public static void reportMaking(int n,int n2,int n3){
+    public static void reportMaking(int q,int q2,int q3,int n,int n2,int n3){
         System.out.println("\n\nYour report\n\n");
         System.out.println("\t\t\tType\t\t\t\tTotal Question\t\t\tAnswered Correctly\t\t\tMarks Scored");
-        System.out.println("\t\t\tMCQ Question\t\t\t"+n+"\t\t\t\t\t\t"+n+"\t\t\t\t\t\t\t"+n);
-        System.out.println("\t\t\tObjectice Question\t\t"+n2+"\t\t\t\t\t\t"+n2+"\t\t\t\t\t\t\t"+n2);
-        System.out.println("\t\t\tSubjective Question\t\t"+n3+"\t\t\t\t\t\t"+n3+"\t\t\t\t\t\t\t"+n3);
+        System.out.println("\t\t\tMCQ Question\t\t\t"+q+"\t\t\t\t\t\t"+n+"\t\t\t\t\t\t\t"+n);
+        System.out.println("\t\t\tObjectice Question\t\t"+q2+"\t\t\t\t\t\t"+n2+"\t\t\t\t\t\t\t"+n2);
+        System.out.println("\t\t\tSubjective Question\t\t"+q3+"\t\t\t\t\t\t"+n3+"\t\t\t\t\t\t\t"+n3);
+        System.out.println("\t\t\tTotal Marks\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t"+(n+n2+n3)+"\n\n\n");
 
+    }
+
+    public static void reportAnalyse(int q,int q2,int q3,int n,int n2,int n3){
+        if(n<q){
+            System.out.println("You are weak at MCQ-Type question");
+        }else if(n==q){
+            System.out.println("You are very good in MCQ type question");
+        }
+        if(n2<q2){
+            System.out.println("You are weak in Objective-Type Question");
+        } else if (n == q) {
+            System.out.println("You are very good at Objective-Type Question");
+        }
+        if(n3<q3){
+            System.out.println("You are weak at Subjective-Type Question");
+        } else if (n3 == q3) {
+            System.out.println("You are very good at Subjective-Type Question");
+        }
     }
     public static void main() {
         int x = 0;
@@ -33,6 +52,9 @@ public class Grading2 {
         int z1= 0;
         int z2= 0;
         int z3= 0;
+        int Mcq_ques = 0;
+        int Objective_ques = 0;
+        int Subjective_ques = 0;
 
         int MCQ_marks = 0;
         int Objective_marks = 0;
@@ -65,8 +87,9 @@ public class Grading2 {
 //                System.out.println(x+"MCQ");
                 y = y+6;
                 z1++;
+                Mcq_ques++;
                 if(y>= parts_MCQ_Question.length){
-                    x++;
+//                    x++;
                     break;
                 }
             }
@@ -80,6 +103,7 @@ public class Grading2 {
 //                System.out.println(x);
                 y2 = y2+4;
                 z2++;
+                Objective_ques++;
 //                System.out.println(y2);
                 if(y2>= parts_Objective_Question.length){
                     break;
@@ -95,6 +119,7 @@ public class Grading2 {
                 x++;
                 y3 = y3+2;
                 z3++;
+                Subjective_ques++;
 //                System.out.println("Ok");
                 if(y2>= parts_Subjective_Question.length){
                     break;
@@ -116,14 +141,21 @@ public class Grading2 {
 //        System.out.println(Subjective_marks);
         System.out.println("Total Marks:"+total_Marks);
 //        System.out.println(z1+" \t "+z2+"\t"+z3);
+//
+//        System.out.println("You have scored "+MCQ_marks+" in MCQ Question ");
+//        System.out.println("You have answered "+MCQ_marks+" MCQ Questions correctly");
+//        System.out.println("You have scored "+Objective_marks+" in Objective Question ");
+//        System.out.println("You have answered "+Objective_marks+" Objective correctly");
+//        System.out.println("You have scored "+Subjective_marks+" in Subjective Question ");
+//        System.out.println("You have answered "+Subjective_marks+" Subjective correctly");
 
-        System.out.println("You have scored "+MCQ_marks+" in MCQ Question ");
-        System.out.println("You have answered "+MCQ_marks+" MCQ Questions correctly");
-        System.out.println("You have scored "+Objective_marks+" in Objective Question ");
-        System.out.println("You have answered "+Objective_marks+" Objective correctly");
-        System.out.println("You have scored "+Subjective_marks+" in Subjective Question ");
-        System.out.println("You have answered "+Subjective_marks+" Subjective correctly");
-        reportMaking(MCQ_marks,Objective_marks,Subjective_marks);
+        reportMaking(Mcq_ques,Objective_ques,Subjective_ques,MCQ_marks,Objective_marks,Subjective_marks);
+
+        reportAnalyse(Mcq_ques,Objective_ques,Subjective_ques,MCQ_marks,Objective_marks,Subjective_marks);
+
+//        System.out.println("No of MCQ Questions: "+Mcq_ques);
+//        System.out.println("No of Objective Questions: "+Objective_ques);
+//        System.out.println("No of Subjective Questions: "+Subjective_ques);
 //        return total_Marks;
     }
 }
