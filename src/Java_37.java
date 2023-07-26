@@ -35,6 +35,7 @@ public class Java_37 {
         System.out.println("Area of the circle is "+areaCircle(r));
     }catch (Exception e){
            System.out.println(e);
+//           e.printStackTrace();
        }
     }
 }
