@@ -6,7 +6,7 @@
 //It will perform this untill the end of the loop
 //After the end of first loop the end of the array has the greatest element
 //We run this for the entire length of the array
-
+//It is stable sort because when there are multiple same element it mentains its position
 import java.util.Arrays;
 public class DSA_13 {
     public static void main(String[] args) {
