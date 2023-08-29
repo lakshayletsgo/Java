@@ -4,6 +4,7 @@ public class DSA_23 {
         int n = 30;
         int decimalPlace = 3;
         System.out.printf("%.3f  ",sqrt(n,decimalPlace));
+        System.out.println(root(30));
     }
     static double sqrt(int n,int a){
         int s = 0;
@@ -27,6 +28,20 @@ public class DSA_23 {
             }
             root-=inc;
             inc/=10;
+        }
+        return root;
+    }
+
+    static double root(double n){
+        double x = n;
+        double root;
+        while(true){
+            root = 0.5*(x+n/x);
+            if(Math.abs(root-x)<0.1 ){
+                break;
+            }
+            x = root;
+
         }
         return root;
     }
