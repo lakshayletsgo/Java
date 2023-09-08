@@ -8,19 +8,19 @@ import java.util.Arrays;
 
 public class DSA_26 {
     public static void main(String[] args) {
-        int[]arr = {5,8,2,4,1};
+        int[]arr = {5,1,1,2,0,0};
         System.out.println(Arrays.toString(mergeSort(arr)));
     }
-    static int[] mergeSort(int[]arr){
-        if(arr.length==1){
-            return arr;
+    static int[] mergeSort(int[]nums){
+        if(nums.length==1){
+            return nums;
         }
-        int mid  = arr.length/2;
+        int mid  = nums.length/2;
 
 
 //        This will make a copy of the array and store the array in left
-        int []left = mergeSort(Arrays.copyOfRange(arr,0,mid));
-        int []right = mergeSort(Arrays.copyOfRange(arr,mid,arr.length));
+        int []left = mergeSort(Arrays.copyOfRange(nums,0,mid));
+        int []right = mergeSort(Arrays.copyOfRange(nums,mid,nums.length));
         return merge(left,right);
     }
 
