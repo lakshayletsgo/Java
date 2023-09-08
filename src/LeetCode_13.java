@@ -9,7 +9,6 @@ public class LeetCode_13 {
         if (head.next==null)
             return head;
 
-
         while(left-->1){
             left1=left2;
             left2=left2.next;
