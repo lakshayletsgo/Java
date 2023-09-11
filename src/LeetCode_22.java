@@ -11,20 +11,14 @@ public class LeetCode_22 {
         System.out.println(Arrays.toString(plusOne(arr)));
     }
     public static int[] plusOne(int[] digits) {
-        if(digits[digits.length-1]<9){
-            digits[digits.length-1]+=1;
-            return digits;}
         int j=digits.length-1;
         while(j>=0){
             if(digits[j]<9){
                 digits[j]+=1;
                 return digits;
-            }else if (digits[j]==9){
+            }
                 digits[j]=0;
                 j--;
-            }else{
-                j--;
-            }
         }
         int [] newAns = new int[digits.length+1];
         newAns[0] = 1;
