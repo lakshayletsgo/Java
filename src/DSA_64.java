@@ -7,12 +7,12 @@ import java.util.Arrays;
 
 public class DSA_64 {
     public static void main(String[] args) {
-        int[]arr = {4,8,1,5,2,7,2,8};
+        int[]arr = {4,8,1,5,3,7,2,8};
         countSort(arr);
         System.out.println(Arrays.toString(arr));
     }
     public static void countSort(int[]arr){
-        if(arr.length==1||arr.length==0){
+        if(arr.length<=1||arr==null){
             return;
         }
         int max=arr[0];
@@ -26,7 +26,7 @@ public class DSA_64 {
             countArray[num]++;
         }
         int index= 0;
-        for(int i=0;i<max;i++){
+        for(int i=0;i<=max;i++){
             while (countArray[i]>0){
                 arr[index]=i;
                 index++;
