@@ -9,18 +9,18 @@ public class LeetCode_40 {
     public static void main(String[] args) {
 //        System.out.println();
     }
-    public List<Double> averageOfLevels(TreeNode root) {
+    public List<Double> averageOfLevels(TreeNode12 root) {
         List<Double> ans = new ArrayList<>();
         if(root==null){
             return ans;
         }
-        Queue<TreeNode > queue = new LinkedList<>();
+        Queue<TreeNode12> queue = new LinkedList<>();
         queue.offer(root);
         while(!queue.isEmpty()){
             double avg = 0;
             int levelSize = queue.size();
             for(int i=0;i<levelSize;i++){
-                TreeNode currentNode=  queue.poll();
+                TreeNode12 currentNode=  queue.poll();
                 avg+=currentNode.val;
                 if(currentNode.left!=null){
                     queue.offer(currentNode.left);
