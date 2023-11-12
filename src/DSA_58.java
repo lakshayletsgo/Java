@@ -1,6 +1,4 @@
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 //Successor of the Tree Node
@@ -11,15 +9,15 @@ public class DSA_58 {
     public static void main(String[] args) {
 
     }
-    public static TreeNode Successor(TreeNode root, int key){
+    public static TreeNode12 Successor(TreeNode12 root, int key){
         if(root==null){
             return null;
         }
-        Queue<TreeNode> queue  = new LinkedList<>();
+        Queue<TreeNode12> queue  = new LinkedList<>();
         queue.offer(root);
 
         while (!queue.isEmpty()){
-            TreeNode current = queue.poll();
+            TreeNode12 current = queue.poll();
             if(current.left!=null){
                 queue.offer(current.left);
             }

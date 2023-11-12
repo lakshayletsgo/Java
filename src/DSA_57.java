@@ -5,20 +5,19 @@
 //First the root node and then its childeren
 //Then from left to right like level by level
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
 
-class TreeNode {
+class TreeNode27 {
        int val;
-       TreeNode left;
-       TreeNode right;
-       TreeNode() {}
-       TreeNode(int val) { this.val = val; }
-       TreeNode(int val, TreeNode left, TreeNode right) {
+       TreeNode12 left;
+       TreeNode12 right;
+       TreeNode27() {}
+       TreeNode27(int val) { this.val = val; }
+       TreeNode27(int val, TreeNode12 left, TreeNode12 right) {
            this.val = val;
            this.left = left;
            this.right = right;
@@ -28,7 +27,7 @@ public class DSA_57 {
     public static void main(String[] args) {
 
     }
-    public List<List<Integer>> levelOrder(TreeNode root) {
+    public List<List<Integer>> levelOrder(TreeNode12 root) {
 
 //        Here we have return the ans in the form of ArrayList
         List<List<Integer>> ans = new ArrayList<>();
@@ -37,7 +36,7 @@ public class DSA_57 {
         }
 
 //      This is the temp queue where we have store the ans to traverse it
-        Queue<TreeNode> queue= new LinkedList<>();
+        Queue<TreeNode12> queue= new LinkedList<>();
 
 //        We have first stored the root node in the queue and as we move on we remove the root and add its child
         queue.offer(root);
@@ -50,7 +49,7 @@ public class DSA_57 {
             int levelSize = queue.size();
             List<Integer> levell = new ArrayList<>(levelSize);
             for(int i=0;i<levelSize;i++){
-                TreeNode currentNode = queue.poll();
+                TreeNode12 currentNode = queue.poll();
                 levell.add(currentNode.val);
                 if(currentNode.left!=null){
                     queue.offer(currentNode.left);

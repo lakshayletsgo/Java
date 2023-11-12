@@ -103,7 +103,7 @@ class HuffmanCoder{
 public class DSA_67 {
     public static void main(String[] args)throws Exception {
         String msg = "asafgdas";
-        HuffmanCoder newCode = new HuffmanCoder(msg);
+        HuffmanCoder3 newCode = new HuffmanCoder3(msg);
         String cs = newCode.encode(msg);
         System.out.println(cs);
         String es= newCode.decode(cs);
