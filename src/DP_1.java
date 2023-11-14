@@ -16,7 +16,7 @@ public class DP_1 {
         W = max;
         System.out.println(knapSack(val,wt,N,W));
     }
-    public static int N = Integer.MAX_VALUE;
+    public static int N = 20;
     public static int W = 10;
     public static int [][]  table= new int[N+1][W+1];
     public static int knapSack(int[]val, int []wt,int n, int w){
