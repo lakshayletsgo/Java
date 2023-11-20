@@ -50,6 +50,16 @@ class Queue1{
 }
 public class ClassJava_64 {
     public static void main(String[] args) {
+        Queue1 q1 = new Queue1(5);
+        q1.enqueue(20);
+        q1.enqueue(21);
+        q1.enqueue(22);
+        q1.enqueue(23);
+        q1.enqueue(24);
+        System.out.println(q1.dequeue());
+        System.out.println(q1.dequeue());
+        System.out.println(q1.isEmpty());
+        System.out.println(q1.isFull());
 
     }
 }

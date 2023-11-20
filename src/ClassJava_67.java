@@ -22,13 +22,11 @@ class DoubleEndedQueue {
         return rear==-1||front==-1;
     }
     public void insertRear(int n){
-        if(isFull()){
-            System.out.println("Queue is full!!OverFlow");
-            return;
-        }
+
         if(front==-1&&rear==-1){
             front=0;
             rear = 0;
+            arr[rear]= n;
         }else{
 
             arr[++rear]= n;
@@ -43,10 +41,13 @@ class DoubleEndedQueue {
         if(front==-1&&rear==-1){
             front=0;
             rear = 0;
+            arr[front]= n;
         }else{
+
 
             arr[++front]= n;
         }
+
 
     }
     public int deleteFront(){
@@ -71,6 +72,15 @@ class DoubleEndedQueue {
 }
 public class ClassJava_67 {
     public static void main(String[] args) {
+        DoubleEndedQueue d1 = new DoubleEndedQueue(21);
+        d1.insertFront(10);
+        d1.insertFront(21);
+        d1.insertRear(22);
+        d1.insertFront(23);
+        System.out.println(d1.deleteRear());
+        System.out.println(d1.deleteFront());
+        System.out.println(d1.isEmpty());
+        System.out.println(d1.isFull());
 
     }
 }
