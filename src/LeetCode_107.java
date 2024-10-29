@@ -13,7 +13,7 @@ public class LeetCode_107 {
             while (!stack.isEmpty()&&temperatures[stack.peek()]<temperatures[i]){
                 ans[stack.peek()] = i-stack.pop();
             }
-            stack.push(i);
+//            stack.push(i);
         }
         return ans;
     }

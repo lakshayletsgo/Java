@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class Practice_java {
+public class ReLeetCode_1 {
     public static void main(String[] args) {
         System.out.println(containsDuplicate(new int[]{1,2,4,1,4}));
     }
@@ -16,5 +16,4 @@ public class Practice_java {
         }
         return false;
     }
-
 }
