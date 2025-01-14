@@ -1,3 +1,5 @@
+//In this we just depth of left and right child and find which is greater
+
 public class ReLeetCode_46 {
     private class TreeNode {
         int val;
