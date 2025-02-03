@@ -1,64 +1,44 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class ReLeetCode_88 {
     public static void main(String[] args) {
 
     }
-    private int[] heights;
-    private int[] d;
-    private int[] l;
-    private int[] r;
-    private int lenLeaves;
+    Map<Integer,Integer> removed = new HashMap<>();
+    Map<Integer,Integer> left = new HashMap<>();
+    Map<Integer,Integer> right = new HashMap<>();
 
     public int[] treeQueries(TreeNode root, int[] queries) {
-        heights = new int[50000];
-        d = new int[100001];
-        l = new int[100001];
-        r = new int[100001];
-        lenLeaves = 0;
-
-        search(root, 0);
-
-        int n = lenLeaves;
-        int[] maxl = new int[n];
-        int[] maxr = new int[n];
-
-        for (int i = 1; i < n; i++) {
-            maxl[i] = Math.max(maxl[i-1], heights[i-1]);
-        }
-
-        for (int i = n-2; i >= 0; i--) {
-            maxr[i] = Math.max(maxr[i+1], heights[i+1]);
-        }
-
-        int[] ret = new int[queries.length];
+        populateHeights(root,0);
+        populateRemoved(root,0);
+        int []ans = new int[queries.length];
         for (int i = 0; i < queries.length; i++) {
-            int query = queries[i];
-            int maxxl = maxl[l[query]];
-            int maxxr = maxr[r[query]];
-            ret[i] = Math.max(Math.max(maxxl, maxxr), d[query]-1);
+            ans[i] = removed.get(queries[i]);
         }
+        return ans;
 
-        return ret;
-    }
 
-    private void search(TreeNode p, int h) {
-        d[p.val] = h;
+}
 
-        if (p.left == null && p.right == null) {
-            heights[lenLeaves] = h;
-            l[p.val] = r[p.val] = lenLeaves;
-            lenLeaves++;
+    private void populateRemoved(TreeNode root, int i) {
+        if (root==null){
             return;
         }
+        removed.put(root.val,0);
+        populateHeights(root.left,Math.max(i,left.get(root.val)));
+        populateHeights(root.right,Math.max(i,right.get(root.val)));
+    }
 
-        l[p.val] = lenLeaves;
-
-        if (p.left != null) {
-            search(p.left, h + 1);
+    private int populateHeights(TreeNode root, int i) {
+        if (root==null){
+            return i-1;
         }
-        if (p.right != null) {
-            search(p.right, h + 1);
-        }
 
-        r[p.val] = lenLeaves - 1;
+        left.put(root.val,populateHeights(root.left,i+1));
+        right.put(root.val,populateHeights(root.right,i+1));
+
+        return Math.max(left.get(root.val),right.get(root.val));
+
     }
 }
