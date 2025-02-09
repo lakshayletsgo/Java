@@ -1,39 +1,48 @@
+import com.sun.source.tree.Tree;
+
 public class ReLeetCode_92 {
     public static void main(String[] args) {
 
     }
+    private class NodeWrap{
+        final TreeNode node;
+        int max;
+        int min;
+        int sum;
+        boolean validBst = true;
+        NodeWrap(TreeNode node){
+            this.node = node;
+            this.max = node.val;
+            this.min = node.val;
+            this.sum = node.val;
+        }
+    }
     int maxSum = 0;
-    class NodePair{
-    int min, max, sum;
-    }
-    public NodePair getSum(TreeNode root){
-        if(root == null){
-            NodePair a = new NodePair();
-            a.min = Integer.MAX_VALUE;
-            a.max = Integer.MIN_VALUE;
-            a.sum = 0;
-            return a;
-        }
-        NodePair main = new NodePair();
-        NodePair left = getSum(root.left);
-        NodePair right = getSum(root.right);
-
-        if(left.max < root.val && root.val < right.min){
-            main.min = Math.min(root.val, Math.min(left.min, right.min));
-            main.max = Math.max(root.val, Math.max(left.max, right.max));
-            main.sum = root.val + left.sum + right.sum;
-            maxSum = Math.max(maxSum,main.sum);
-        }
-        else{
-            main.min = Integer.MIN_VALUE;
-            main.max = Integer.MAX_VALUE;
-            main.sum = Math.max(left.sum,right.sum);
-        }
-        return main;
-    }
     public int maxSumBST(TreeNode root) {
-        NodePair temp = new NodePair();
-        temp = getSum(root);
-        return maxSum > 0 ? maxSum : 0;
+        getMaxSum(root);
+        return maxSum;
+    }
+
+    private NodeWrap getMaxSum(TreeNode root) {
+        if (root==null)return null ;
+        NodeWrap leftTree = getMaxSum(root.left);
+        NodeWrap rightTree = getMaxSum(root.right);
+        NodeWrap curr = new NodeWrap(root);
+        if (leftTree!=null){
+            curr.sum+= leftTree.sum;
+            curr.max= Math.max(curr.max,leftTree.max);
+            curr.min= Math.min(curr.min,leftTree.min);
+            curr.validBst &= leftTree.validBst&&leftTree.max<root.val;
+        }
+        if (rightTree!=null){
+            curr.sum+= rightTree.sum;
+            curr.max= Math.max(curr.max,rightTree.max);
+            curr.min= Math.min(curr.min,rightTree.min);
+            curr.validBst &= rightTree.validBst&&rightTree.min>root.val;
+        }
+        if (curr.validBst){
+            maxSum  =Math.max(maxSum,curr.sum);
+        }
+        return curr;
     }
 }
