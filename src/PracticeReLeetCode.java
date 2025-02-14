@@ -2,33 +2,38 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PracticeReLeetCode {
-    private class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
-        TreeNode() {}
-        TreeNode(int val) { this.val = val; }
-        TreeNode(int val, TreeNode left, TreeNode right) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-        }}
-    public static void main(String[] args) {
-//        System.out.println(minWindow("eidbaooo","ab"));
+    PracticeReLeetCode children[];
+    boolean isEndOfWord;
+    public PracticeReLeetCode() {
+        children = new PracticeReLeetCode[26];
+        isEndOfWord= false;
     }
-    public TreeNode invertTree(TreeNode root) {
-        if(root==null){
-            return null;
+
+    public void addWord(String word) {
+        PracticeReLeetCode curr = this;
+        for (char c:word.toCharArray()){
+            if (curr.children[c-'a']==null){
+                curr.children[c-'a'] = new PracticeReLeetCode();
+            }
+            curr = curr.children[c-'a'];
         }
-
-//        We just swap the left and right nodes
-        TreeNode temp = root.left;
-        root.left = root.right;
-        root.right = temp;
-        invertTree(root.left);
-        invertTree(root.right);
-        return root;
+        curr.isEndOfWord = true;
     }
 
+    public boolean search(String word) {
+        PracticeReLeetCode curr = this;
+        for (int i = 0; i < word.length(); i++) {
+            char ch = word.charAt(i);
+            if (ch=='.'){
+                for (PracticeReLeetCode ch2: curr.children){
+                    if (ch2!=null&&ch2.search(word.substring(i+1)))return true;
+                    return false;
+                }
+            }
+            if (curr.children[ch-'a']==null)return false;
+            curr = curr.children[ch-'a'];
 
+        }
+        return curr!=null&&curr.isEndOfWord;
     }
+}
