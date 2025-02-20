@@ -19,6 +19,7 @@ public class ReLeetCode_103 {
             large.add(num);
             small.add(large.poll());
         }
+        even = !even;
     }
 
     public double findMedian() {

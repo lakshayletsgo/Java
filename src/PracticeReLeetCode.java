@@ -1,39 +1,30 @@
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.PriorityQueue;
 
 public class PracticeReLeetCode {
-    PracticeReLeetCode children[];
-    boolean isEndOfWord;
-    public PracticeReLeetCode() {
-        children = new PracticeReLeetCode[26];
-        isEndOfWord= false;
+    PriorityQueue<Integer> smallHeap = new PriorityQueue<>(Collections.reverseOrder());
+    PriorityQueue<Integer> largeHeap = new PriorityQueue<>();
+    private boolean even = true;
+
+
+    public void addNum(int num) {
+        if (!even){
+            smallHeap.offer(num);
+            largeHeap.offer(smallHeap.poll());
+        }else{
+            largeHeap.offer(num);
+            smallHeap.offer(largeHeap.poll());
+        }
+        even = !even;
     }
 
-    public void addWord(String word) {
-        PracticeReLeetCode curr = this;
-        for (char c:word.toCharArray()){
-            if (curr.children[c-'a']==null){
-                curr.children[c-'a'] = new PracticeReLeetCode();
-            }
-            curr = curr.children[c-'a'];
+    public double findMedian() {
+        if (even){
+            return (smallHeap.peek()+largeHeap.peek())/2.0;
+        }else{
+            return smallHeap.peek();
         }
-        curr.isEndOfWord = true;
-    }
-
-    public boolean search(String word) {
-        PracticeReLeetCode curr = this;
-        for (int i = 0; i < word.length(); i++) {
-            char ch = word.charAt(i);
-            if (ch=='.'){
-                for (PracticeReLeetCode ch2: curr.children){
-                    if (ch2!=null&&ch2.search(word.substring(i+1)))return true;
-                    return false;
-                }
-            }
-            if (curr.children[ch-'a']==null)return false;
-            curr = curr.children[ch-'a'];
-
-        }
-        return curr!=null&&curr.isEndOfWord;
     }
 }
