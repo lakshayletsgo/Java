@@ -2,40 +2,33 @@ public class ReLeetCode_114 {
     public static void main(String[] args) {
 
     }
-    private int area=0;
-
-    public void dfs(int[][] grid,int r,int c)
-    {
-        int row=grid.length,col=grid[0].length;
-
-        if(r<0||c<0||r>=row||c>=col||grid[r][c]==0) return;
-        if(grid[r][c]==1) area++;
-
-        grid[r][c]=0;
-
-        dfs(grid,r+1,c);
-        dfs(grid,r-1,c);
-        dfs(grid,r,c+1);
-        dfs(grid,r,c-1);
-
-    }
-
+    private static int area =0;
+    private static int row;
+    private static int col;
     public int maxAreaOfIsland(int[][] grid) {
-        int row=grid.length,col=grid[0].length,maxarea=0;
-
-        for(int i=0;i<row;i++)
-        {
-            for(int j=0;j<col;j++)
-            {
-                if(grid[i][j]==1)
-                {
-                    dfs(grid,i,j);
-                    if(area>maxarea) maxarea=area;
+        int maxArea = 0;
+        row = grid.length;
+        col = grid[0].length;
+        if (row==0||col==0)return 0;
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                if (grid[i][j]==1){
+                    DFS(grid,i,j);
+                    if (maxArea<area) maxArea = area;
                     area=0;
                 }
             }
         }
+        return maxArea;
+    }
 
-        return maxarea;
+    private void DFS(int[][] grid, int i, int j) {
+        if (i<0||j<0||i>=row||j>=col||grid[i][j]==0)return;
+        if (grid[i][j]==1)area++;
+        grid[i][j]=0;
+        DFS(grid,i+1,j);
+        DFS(grid,i-1,j);
+        DFS(grid,i,j+1);
+        DFS(grid,i,j-1);
     }
 }
