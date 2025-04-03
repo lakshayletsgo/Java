@@ -11,7 +11,7 @@ public class ReLeetCode_158 {
         for (int i=0;i<n;i++){
             for (int left=0;left<n-i;left++){
                 int right= left+i;
-                for (int k=left+1;k<right;k++)dp[left][right]=Math.max(dp[left][right],nums[left]*nums[k]*nums[right]+dp[left][k]+dp[k][right]);
+                for (int k=left+1;k<right;k++)dp[left][right]=Math.max(dp[left][right],temp[left]*temp[k]*temp[right]+dp[left][k]+dp[k][right]);
             }
         }
         return dp[0][n-1];
