@@ -1,20 +1,34 @@
-import java.util.Arrays;
+import com.sun.source.tree.Tree;
 
+import java.sql.Array;
+import java.util.*;
 public class Practice_java {
-    public static void main(String[] args) {
-        System.out.println(containsDuplicate(new int[]{1,2,4,1,4}));
+    private class Node {
+        public int val;
+        public List<Node> neighbors;
+        public Node() {
+            val = 0;
+            neighbors = new ArrayList<Node>();
+        }
+        public Node(int _val) {
+            val = _val;
+            neighbors = new ArrayList<Node>();
+        }
+        public Node(int _val, ArrayList<Node> _neighbors) {
+            val = _val;
+            neighbors = _neighbors;
+        }
     }
-    public static boolean containsDuplicate(int[] nums) {
-        if(nums.length<=1){
-            return false;
+    public static void main(String[] args) {
+    }
+    public int maxArea(int[] height) {
+        int maxArea = 0,s=0,e=height.length;
+        while (s<e){
+            maxArea= Math.max(maxArea,Math.min(height[s],height[e])*(e-s));
+            if (height[s]>height[e])e--;
+            else s++;
         }
-        Arrays.sort(nums);
-        for(int i=0;i<nums.length-1;i++){
-            if(nums[i]==nums[i+1]){
-                return true;
-            }
-        }
-        return false;
+        return maxArea;
     }
 
-}
+    }
