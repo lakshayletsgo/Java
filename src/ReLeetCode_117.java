@@ -38,7 +38,7 @@ public class ReLeetCode_117 {
         if (i<0||i>=n||i1<0||i1>=m||atlantic[i][i1]||minValue>heights[i][i1])return;
         atlantic[i][i1] = true;
         dfs(heights,atlantic,heights[i][i1],i+1,i1);
-        dfs(heights,atlantic,heights[i][i1],i,i1-1);
+        dfs(heights,atlantic,heights[i][i1],i-1,i1);
         dfs(heights,atlantic,heights[i][i1],i,i1+1);
         dfs(heights,atlantic,heights[i][i1],i,i1-1);
 
