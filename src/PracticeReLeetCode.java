@@ -38,17 +38,26 @@ public class PracticeReLeetCode {
 
 
 
-    public boolean isPalindrome(String s) {
-        int start=0;
-        int end=s.length()-1;
-        while(start<=end){
-            if(!Character.isLetterOrDigit(s.charAt(start))||!Character.isSpaceChar(' '))start++;
-            else if(!Character.isLetterOrDigit(s.charAt(end))||!Character.isSpaceChar(' '))end--;
-            else if(Character.toLowerCase(s.charAt(start))==Character.toLowerCase(s.charAt(end))){
-                start++;
-                end--;
-            }else return false;
-        }
-        return true;
+//    public boolean isPalindrome(String s) {
+//        int start=0;
+//        int end=s.length()-1;
+//        while(start<=end){
+//            if(!Character.isLetterOrDigit(s.charAt(start))||!Character.isSpaceChar(' '))start++;
+//            else if(!Character.isLetterOrDigit(s.charAt(end))||!Character.isSpaceChar(' '))end--;
+//            else if(Character.toLowerCase(s.charAt(start))==Character.toLowerCase(s.charAt(end))){
+//                start++;
+//                end--;
+//            }else return false;
+//        }
+//        return true;
+//    }
+
+
+
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer,Integer> map= new HashMap<>();
+        for(int i=0;i<nums.length;i++)map.put(nums[i],i);
+        for(int i=0;i<nums.length;i++)if(map.containsKey(target-nums[i])&&map.get(target-nums[i])!=i)return new int[]{i,map.get(target-nums[i])};
+        return new int[]{-1,-1};
     }
 }
