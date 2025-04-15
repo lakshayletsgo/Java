@@ -85,15 +85,37 @@ public class PracticeReLeetCode {
 //        return ans;}
 
 
-    public int maxArea(int[] height) {
-        int s=0;
-        int max=0;
-        int e=height.length-1;
-        while(s<e){
-            max=Math.max(Math.min(height[s],height[e])*(e-s),max);
-            if(height[s]>height[e])e--;
-            else s++;
+//    public int maxArea(int[] height) {
+//        int s=0;
+//        int max=0;
+//        int e=height.length-1;
+//        while(s<e){
+//            max=Math.max(Math.min(height[s],height[e])*(e-s),max);
+//            if(height[s]>height[e])e--;
+//            else s++;
+//        }
+//        return max;
+//    }
+
+
+    public int trap(int[] height) {
+        int start= 0;
+        int end= height.length-1;
+        int leftMax=height[start];
+        int rightMax=height[end];
+        int ans=0;
+        while(start<end){
+            if(leftMax<rightMax){
+                start++;
+                leftMax=Math.max(leftMax,height[start]);
+                ans+=leftMax-height[start];
+            }else{
+                end--;
+                rightMax=Math.max(rightMax,height[end]);
+                ans+=rightMax-height[end];
+            }
         }
-        return max;
+        return ans;
     }
+
 }
