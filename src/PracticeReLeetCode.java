@@ -98,24 +98,38 @@ public class PracticeReLeetCode {
 //    }
 
 
-    public int trap(int[] height) {
-        int start= 0;
-        int end= height.length-1;
-        int leftMax=height[start];
-        int rightMax=height[end];
-        int ans=0;
-        while(start<end){
-            if(leftMax<rightMax){
-                start++;
-                leftMax=Math.max(leftMax,height[start]);
-                ans+=leftMax-height[start];
-            }else{
-                end--;
-                rightMax=Math.max(rightMax,height[end]);
-                ans+=rightMax-height[end];
+//    public int trap(int[] height) {
+//        int start= 0;
+//        int end= height.length-1;
+//        int leftMax=height[start];
+//        int rightMax=height[end];
+//        int ans=0;
+//        while(start<end){
+//            if(leftMax<rightMax){
+//                start++;
+//                leftMax=Math.max(leftMax,height[start]);
+//                ans+=leftMax-height[start];
+//            }else{
+//                end--;
+//                rightMax=Math.max(rightMax,height[end]);
+//                ans+=rightMax-height[end];
+//            }
+//        }
+//        return ans;
+//    }
+
+    public boolean isValid(String s) {
+        Stack<Character> stack = new Stack<>();
+        for(int i=0;i<s.length();i++){
+            if(s.charAt(i)=='('||s.charAt(i)=='{'||s.charAt(i)=='[')stack.push(s.charAt(i));
+            else {
+                if(stack.isEmpty())return false;
+                char top=stack.peek();
+                if((s.charAt(i)==')'&&top=='(')||(s.charAt(i)=='}'&&top=='{')||(s.charAt(i)==']'&&top=='['))stack.pop();
+                else return false;
             }
         }
-        return ans;
+        return stack.isEmpty();
     }
 
 }
