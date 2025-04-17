@@ -118,18 +118,43 @@ public class PracticeReLeetCode {
 //        return ans;
 //    }
 
-    public boolean isValid(String s) {
-        Stack<Character> stack = new Stack<>();
-        for(int i=0;i<s.length();i++){
-            if(s.charAt(i)=='('||s.charAt(i)=='{'||s.charAt(i)=='[')stack.push(s.charAt(i));
-            else {
-                if(stack.isEmpty())return false;
-                char top=stack.peek();
-                if((s.charAt(i)==')'&&top=='(')||(s.charAt(i)=='}'&&top=='{')||(s.charAt(i)==']'&&top=='['))stack.pop();
-                else return false;
-            }
+//    public boolean isValid(String s) {
+//        Stack<Character> stack = new Stack<>();
+//        for(int i=0;i<s.length();i++){
+//            if(s.charAt(i)=='('||s.charAt(i)=='{'||s.charAt(i)=='[')stack.push(s.charAt(i));
+//            else {
+//                if(stack.isEmpty())return false;
+//                char top=stack.peek();
+//                if((s.charAt(i)==')'&&top=='(')||(s.charAt(i)=='}'&&top=='{')||(s.charAt(i)==']'&&top=='['))stack.pop();
+//                else return false;
+//            }
+//        }
+//        return stack.isEmpty();
+//    }
+class MinStack {
+
+    int min = Integer.MAX_VALUE;
+    Stack<Integer> stack = new Stack<>();
+
+    public void push(int val) {
+        if(val<=min){
+            stack.push(min);
+            min= val;
         }
-        return stack.isEmpty();
+        stack.push(val);
     }
+
+    public void pop() {
+        if(stack.pop()==min)min=stack.pop();
+    }
+
+    public int top() {
+        return stack.peek();
+    }
+
+    public int getMin() {
+        return min;
+    }
+}
 
 }
