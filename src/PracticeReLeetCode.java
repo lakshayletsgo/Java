@@ -131,30 +131,61 @@ public class PracticeReLeetCode {
 //        }
 //        return stack.isEmpty();
 //    }
-class MinStack {
+//class MinStack {
+//
+//    int min = Integer.MAX_VALUE;
+//    Stack<Integer> stack = new Stack<>();
+//
+//    public void push(int val) {
+//        if(val<=min){
+//            stack.push(min);
+//            min= val;
+//        }
+//        stack.push(val);
+//    }
+//
+//    public void pop() {
+//        if(stack.pop()==min)min=stack.pop();
+//    }
+//
+//    public int top() {
+//        return stack.peek();
+//    }
+//
+//    public int getMin() {
+//        return min;
+//    }
+//}
 
-    int min = Integer.MAX_VALUE;
-    Stack<Integer> stack = new Stack<>();
 
-    public void push(int val) {
-        if(val<=min){
-            stack.push(min);
-            min= val;
+
+    public int evalRPN(String[] tokens) {
+        Stack<Integer> stack = new Stack<>();
+        int operand1,operand2;
+        int result;
+        for(String token:tokens){
+            if(token.equals("+")){
+                operand1 = stack.pop();
+                operand2= stack.pop();
+                stack.push( operand2+operand1);
+            }else if(token.equals("-")){
+                operand1 = stack.pop();
+                operand2= stack.pop();
+                stack.push( operand2-operand1);
+            }else if(token.equals("/")){
+                operand1 = stack.pop();
+                operand2= stack.pop();
+                stack.push( operand2/operand1);
+            }else if(token.equals("*")){
+                operand1 = stack.pop();
+                operand2= stack.pop();
+                stack.push( operand2*operand1);
+            }else{
+                stack.push(Integer.parseInt(token));
+            }
         }
-        stack.push(val);
-    }
-
-    public void pop() {
-        if(stack.pop()==min)min=stack.pop();
-    }
-
-    public int top() {
         return stack.peek();
-    }
 
-    public int getMin() {
-        return min;
     }
-}
 
 }
