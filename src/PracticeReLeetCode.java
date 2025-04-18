@@ -159,33 +159,46 @@ public class PracticeReLeetCode {
 
 
 
-    public int evalRPN(String[] tokens) {
-        Stack<Integer> stack = new Stack<>();
-        int operand1,operand2;
-        int result;
-        for(String token:tokens){
-            if(token.equals("+")){
-                operand1 = stack.pop();
-                operand2= stack.pop();
-                stack.push( operand2+operand1);
-            }else if(token.equals("-")){
-                operand1 = stack.pop();
-                operand2= stack.pop();
-                stack.push( operand2-operand1);
-            }else if(token.equals("/")){
-                operand1 = stack.pop();
-                operand2= stack.pop();
-                stack.push( operand2/operand1);
-            }else if(token.equals("*")){
-                operand1 = stack.pop();
-                operand2= stack.pop();
-                stack.push( operand2*operand1);
-            }else{
-                stack.push(Integer.parseInt(token));
-            }
+//    public int evalRPN(String[] tokens) {
+//        Stack<Integer> stack = new Stack<>();
+//        int operand1,operand2;
+//        int result;
+//        for(String token:tokens){
+//            if(token.equals("+")){
+//                operand1 = stack.pop();
+//                operand2= stack.pop();
+//                stack.push( operand2+operand1);
+//            }else if(token.equals("-")){
+//                operand1 = stack.pop();
+//                operand2= stack.pop();
+//                stack.push( operand2-operand1);
+//            }else if(token.equals("/")){
+//                operand1 = stack.pop();
+//                operand2= stack.pop();
+//                stack.push( operand2/operand1);
+//            }else if(token.equals("*")){
+//                operand1 = stack.pop();
+//                operand2= stack.pop();
+//                stack.push( operand2*operand1);
+//            }else{
+//                stack.push(Integer.parseInt(token));
+//            }
+//        }
+//        return stack.peek();
+//
+//    }
+
+
+
+
+
+
+    public void helper(List<String> ans, String s, int n, int left, int right){
+        if(s.length()==n*2){
+            ans.add(s);
+            return;
         }
-        return stack.peek();
-
+        if(left<n)helper(ans,s+"(",n,left+1,right);
+        if(right<left)helper(ans,s+")",n,left,right+1);
     }
-
 }
