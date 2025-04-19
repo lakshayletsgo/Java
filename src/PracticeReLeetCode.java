@@ -193,12 +193,28 @@ public class PracticeReLeetCode {
 
 
 
-    public void helper(List<String> ans, String s, int n, int left, int right){
-        if(s.length()==n*2){
-            ans.add(s);
-            return;
+//    public void helper(List<String> ans, String s, int n, int left, int right){
+//        if(s.length()==n*2){
+//            ans.add(s);
+//            return;
+//        }
+//        if(left<n)helper(ans,s+"(",n,left+1,right);
+//        if(right<left)helper(ans,s+")",n,left,right+1);
+//    }
+
+
+
+    public int[] dailyTemperatures(int[] temperatures) {
+        int []ans = new int[temperatures.length];
+        Arrays.fill(ans,0);
+        Stack<Map.Entry<Integer,Integer>> stack = new Stack<>();
+        for(int i=0;i<temperatures.length;i++){
+            while(!stack.isEmpty()&&(stack.peek().getKey()<temperatures[i])){
+                Map.Entry<Integer,Integer> temp = stack.pop();
+                ans[temp.getValue()] = i-temp.getKey();
+            }
+            stack.push(Map.entry(temperatures[i],i));
         }
-        if(left<n)helper(ans,s+"(",n,left+1,right);
-        if(right<left)helper(ans,s+")",n,left,right+1);
+        return ans;
     }
 }
