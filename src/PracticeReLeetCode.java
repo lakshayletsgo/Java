@@ -203,18 +203,41 @@ public class PracticeReLeetCode {
 //    }
 
 
+//
+//    public int[] dailyTemperatures(int[] temperatures) {
+//        int []ans = new int[temperatures.length];
+//        Arrays.fill(ans,0);
+//        Stack<Map.Entry<Integer,Integer>> stack = new Stack<>();
+//        for(int i=0;i<temperatures.length;i++){
+//            while(!stack.isEmpty()&&(stack.peek().getKey()<temperatures[i])){
+//                Map.Entry<Integer,Integer> temp = stack.pop();
+//                ans[temp.getValue()] = i-temp.getKey();
+//            }
+//            stack.push(Map.entry(temperatures[i],i));
+//        }
+//        return ans;
+//    }
 
-    public int[] dailyTemperatures(int[] temperatures) {
-        int []ans = new int[temperatures.length];
-        Arrays.fill(ans,0);
-        Stack<Map.Entry<Integer,Integer>> stack = new Stack<>();
-        for(int i=0;i<temperatures.length;i++){
-            while(!stack.isEmpty()&&(stack.peek().getKey()<temperatures[i])){
-                Map.Entry<Integer,Integer> temp = stack.pop();
-                ans[temp.getValue()] = i-temp.getKey();
-            }
-            stack.push(Map.entry(temperatures[i],i));
+
+
+
+
+
+    public int carFleet(int target, int[] position, int[] speed) {
+        int n =position.length;
+        if(n==1)return 1;
+        int[][] posAndSpeed= new int[n][2];
+        Stack<Double> stack = new Stack<>();
+        for(int i=0;i<n;i++){
+            posAndSpeed[i][0]=position[i];
+            posAndSpeed[i][1]=speed[i];
         }
-        return ans;
+        Arrays.sort(posAndSpeed,Comparator.comparingInt(o->o[0]));
+        for(int i=n-1;i>=0;i--){
+            double currTime = (double) (target-posAndSpeed[i][0])/posAndSpeed[i][1];
+            if(!stack.isEmpty()&&currTime<=stack.peek())  continue;
+            else stack.push(currTime);
+        }
+        return stack.size();
     }
 }
