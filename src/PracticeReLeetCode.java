@@ -258,4 +258,18 @@ public class PracticeReLeetCode {
 //        }
 //        return maxArea;
 //    }
+
+    public int search(int[] nums, int target) {
+        if(nums.length==1)return nums[0]==target?0:-1;
+        int s=0;
+        int e=nums.length;
+        while(s<e){
+            int mid=(s+e)/2;
+            if(target==nums[mid])return mid;
+            else if(target>nums[mid]) s=mid+1;
+            else e=mid;
+
+        }
+        return -1;
+    }
 }
