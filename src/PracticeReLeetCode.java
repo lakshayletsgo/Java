@@ -274,14 +274,35 @@ public class PracticeReLeetCode {
 //    }
 
 
-    public boolean searchMatrix(int[][] matrix, int target) {
-        int r= 0;
-        int c=matrix[0].length-1;
-        while(c>=0&&r<matrix.length){
-            if(matrix[r][c]==target)return true;
-            else if(matrix[r][c]<target)r++;
-            else c--;
+//    public boolean searchMatrix(int[][] matrix, int target) {
+//        int r= 0;
+//        int c=matrix[0].length-1;
+//        while(c>=0&&r<matrix.length){
+//            if(matrix[r][c]==target)return true;
+//            else if(matrix[r][c]<target)r++;
+//            else c--;
+//        }
+//        return false;
+//    }
+
+
+
+    public int minEatingSpeed(int[] piles, int h) {
+        int max= 0;
+        for(int pile:piles)max=Math.max(max,pile);
+        return binarySearch(max,piles,h,1);
+    }
+    private int binarySearch(int right, int[]piles,int target,int left ){
+        while(left<=right){
+            int mid=left+(right-left)/2;
+            if(computeData(piles,mid)<=target)right=mid-1;
+            else left=mid+1;
         }
-        return false;
+        return left;
+    }
+    private long computeData(int[]piles,int mid){
+        long res=0;
+        for(int pile:piles)res+=(mid+pile-1)/mid;
+        return res;
     }
 }
