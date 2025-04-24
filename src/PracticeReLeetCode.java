@@ -287,22 +287,36 @@ public class PracticeReLeetCode {
 
 
 
-    public int minEatingSpeed(int[] piles, int h) {
-        int max= 0;
-        for(int pile:piles)max=Math.max(max,pile);
-        return binarySearch(max,piles,h,1);
-    }
-    private int binarySearch(int right, int[]piles,int target,int left ){
-        while(left<=right){
-            int mid=left+(right-left)/2;
-            if(computeData(piles,mid)<=target)right=mid-1;
-            else left=mid+1;
+//    public int minEatingSpeed(int[] piles, int h) {
+//        int max= 0;
+//        for(int pile:piles)max=Math.max(max,pile);
+//        return binarySearch(max,piles,h,1);
+//    }
+//    private int binarySearch(int right, int[]piles,int target,int left ){
+//        while(left<=right){
+//            int mid=left+(right-left)/2;
+//            if(computeData(piles,mid)<=target)right=mid-1;
+//            else left=mid+1;
+//        }
+//        return left;
+//    }
+//    private long computeData(int[]piles,int mid){
+//        long res=0;
+//        for(int pile:piles)res+=(mid+pile-1)/mid;
+//        return res;
+//    }
+
+
+
+
+    public int findMin(int[] nums) {
+        int left=0;
+        int right=nums.length-1;
+        while(left<right){
+            int mid=(left+right)/2;
+            if(nums[mid]>nums[right])left=mid+1;
+            else right=mid;
         }
-        return left;
-    }
-    private long computeData(int[]piles,int mid){
-        long res=0;
-        for(int pile:piles)res+=(mid+pile-1)/mid;
-        return res;
+        return nums[left];
     }
 }
