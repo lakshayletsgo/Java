@@ -321,21 +321,55 @@ public class PracticeReLeetCode {
 //    }
 
 
-    public int search(int[] nums, int target) {
-        int s=0;
-        int e=nums.length-1;
-        while(s<=e){
-            int mid=s+(e-s)/2;
-            if(nums[mid]==target)return mid;
-            if(nums[s]<=nums[mid]){
-                if(nums[s]<=target&&target<nums[mid]){
-                    e=mid-1;
-                }else s=mid+1;
-            }else{
-                if(nums[mid]<target&&target<=nums[e])s=mid+1;
-                else e=mid-1;
-            }
+//    public int search(int[] nums, int target) {
+//        int s=0;
+//        int e=nums.length-1;
+//        while(s<=e){
+//            int mid=s+(e-s)/2;
+//            if(nums[mid]==target)return mid;
+//            if(nums[s]<=nums[mid]){
+//                if(nums[s]<=target&&target<nums[mid]){
+//                    e=mid-1;
+//                }else s=mid+1;
+//            }else{
+//                if(nums[mid]<target&&target<=nums[e])s=mid+1;
+//                else e=mid-1;
+//            }
+//        }
+//        return -1;
+//    }
+
+
+
+    private class Data{
+        String str;
+        int time;
+        Data(String str, int time){
+            this.str=str;
+            this.time=time;
         }
-        return -1;
+    }
+    HashMap <String,List<Data>>map;
+
+    public TimeMap() {
+        map=new HashMap<>();
+    }
+
+    public void set(String key, String value, int timestamp) {
+        map.computeIfAbsent(key,k->new ArrayList<>()).add(new Data(value,timestamp));
+    }
+
+    public String get(String key, int timestamp) {
+        if(!map.containsKey(key))return "";
+        return binarySearch(map.get(key),timestamp);
+    }
+    private String binarySearch(List<Data> list,int timestamp){
+        int l=0,r=list.size()-1;
+        while(l<r){
+            int mid=(l+r+1)>>>1;
+            if(list.get(mid).time>timestamp)r=mid-1;
+            else l=mid;
+        }
+        return list.get(l).time<=timestamp?list.get(l).str:"";
     }
 }
