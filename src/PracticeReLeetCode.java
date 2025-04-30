@@ -423,22 +423,40 @@ public class PracticeReLeetCode {
 
 
 
-    public int lengthOfLongestSubstring(String s) {
-        Set<Character> set= new HashSet<>();
-        int maxLen=0;
-        int left=0;
-        for(int right=0;right<s.length();right++){
-            if(!set.contains(s.charAt(right))){
-                set.add(s.charAt(right));
-                maxLen=Math.max(maxLen,right-left+1);
-            }else{
-                while(set.contains(s.charAt(right))){
-                    set.remove(s.charAt(left));
-                    left++;
-                }
-                set.add(s.charAt(right));
+//    public int lengthOfLongestSubstring(String s) {
+//        Set<Character> set= new HashSet<>();
+//        int maxLen=0;
+//        int left=0;
+//        for(int right=0;right<s.length();right++){
+//            if(!set.contains(s.charAt(right))){
+//                set.add(s.charAt(right));
+//                maxLen=Math.max(maxLen,right-left+1);
+//            }else{
+//                while(set.contains(s.charAt(right))){
+//                    set.remove(s.charAt(left));
+//                    left++;
+//                }
+//                set.add(s.charAt(right));
+//            }
+//        }
+//        return maxLen;
+//    }
+
+
+
+    public int characterReplacement(String s, int k) {
+        int []arr=new int[26];
+        int l=0,max=0,res=0;
+        for(int i=0;i<s.length();i++){
+            arr[s.charAt(i)-'A']++;
+            max=Math.max(max,arr[s.charAt(i)-'A']);
+            if(i-l+1-max>k){
+                arr[s.charAt(l)-'A']--;
+                l++;
             }
+            res=Math.max(res,i-l+1);
         }
-        return maxLen;
+        return res;
+
     }
     }
