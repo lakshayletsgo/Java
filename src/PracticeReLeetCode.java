@@ -444,19 +444,43 @@ public class PracticeReLeetCode {
 
 
 
-    public int characterReplacement(String s, int k) {
-        int []arr=new int[26];
-        int l=0,max=0,res=0;
-        for(int i=0;i<s.length();i++){
-            arr[s.charAt(i)-'A']++;
-            max=Math.max(max,arr[s.charAt(i)-'A']);
-            if(i-l+1-max>k){
-                arr[s.charAt(l)-'A']--;
-                l++;
-            }
-            res=Math.max(res,i-l+1);
-        }
-        return res;
+//    public int characterReplacement(String s, int k) {
+//        int []arr=new int[26];
+//        int l=0,max=0,res=0;
+//        for(int i=0;i<s.length();i++){
+//            arr[s.charAt(i)-'A']++;
+//            max=Math.max(max,arr[s.charAt(i)-'A']);
+//            if(i-l+1-max>k){
+//                arr[s.charAt(l)-'A']--;
+//                l++;
+//            }
+//            res=Math.max(res,i-l+1);
+//        }
+//        return res;
+//
+//    }
 
+
+    public boolean checkInclusion(String s1, String s2) {
+        int[]arr= new int[26];
+        int s=0,e=0;
+        for(int i=0;i<s1.length();i++)arr[s1.charAt(i)-'a']++;
+        while(e<s2.length()){
+            arr[s2.charAt(e)-'a']--;
+            while(arr[s2.charAt(e)-'a']<0){
+                arr[s2.charAt(s)-'a']++;
+                s++;
+            }
+            boolean flag=true;
+            for(int i=0;i<26;i++){
+                if(arr[i]!=0){
+                    flag=false;
+                    break;
+                }
+            }
+            if(flag&&e-s+1==s1.length())return true;
+            e++;
+        }
+        return false;
     }
     }
