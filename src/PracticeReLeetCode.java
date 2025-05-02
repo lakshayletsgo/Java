@@ -461,26 +461,73 @@ public class PracticeReLeetCode {
 //    }
 
 
-    public boolean checkInclusion(String s1, String s2) {
-        int[]arr= new int[26];
-        int s=0,e=0;
-        for(int i=0;i<s1.length();i++)arr[s1.charAt(i)-'a']++;
-        while(e<s2.length()){
-            arr[s2.charAt(e)-'a']--;
-            while(arr[s2.charAt(e)-'a']<0){
-                arr[s2.charAt(s)-'a']++;
-                s++;
-            }
-            boolean flag=true;
-            for(int i=0;i<26;i++){
-                if(arr[i]!=0){
-                    flag=false;
-                    break;
-                }
-            }
-            if(flag&&e-s+1==s1.length())return true;
-            e++;
+//    public boolean checkInclusion(String s1, String s2) {
+//        int[]arr= new int[26];
+//        int s=0,e=0;
+//        for(int i=0;i<s1.length();i++)arr[s1.charAt(i)-'a']++;
+//        while(e<s2.length()){
+//            arr[s2.charAt(e)-'a']--;
+//            while(arr[s2.charAt(e)-'a']<0){
+//                arr[s2.charAt(s)-'a']++;
+//                s++;
+//            }
+//            boolean flag=true;
+//            for(int i=0;i<26;i++){
+//                if(arr[i]!=0){
+//                    flag=false;
+//                    break;
+//                }
+//            }
+//            if(flag&&e-s+1==s1.length())return true;
+//            e++;
+//        }
+//        return false;
+//    }
+
+
+
+    public String minWindow(String s, String t) {
+        if (s.length() < t.length()) {
+            return "";
         }
-        return false;
+
+        Map<Character, Integer> charCount = new HashMap<>();
+        for (char ch : t.toCharArray()) {
+            charCount.put(ch, charCount.getOrDefault(ch, 0) + 1);
+        }
+
+        int targetCharsRemaining = t.length();
+        int[] minWindow = {0, Integer.MAX_VALUE};
+        int startIndex = 0;
+
+        for (int endIndex = 0; endIndex < s.length(); endIndex++) {
+            char ch = s.charAt(endIndex);
+            if (charCount.containsKey(ch) && charCount.get(ch) > 0) {
+                targetCharsRemaining--;
+            }
+            charCount.put(ch, charCount.getOrDefault(ch, 0) - 1);
+
+            if (targetCharsRemaining == 0) {
+                while (true) {
+                    char charAtStart = s.charAt(startIndex);
+                    if (charCount.containsKey(charAtStart) && charCount.get(charAtStart) == 0) {
+                        break;
+                    }
+                    charCount.put(charAtStart, charCount.getOrDefault(charAtStart, 0) + 1);
+                    startIndex++;
+                }
+
+                if (endIndex - startIndex < minWindow[1] - minWindow[0]) {
+                    minWindow[0] = startIndex;
+                    minWindow[1] = endIndex;
+                }
+
+                charCount.put(s.charAt(startIndex), charCount.getOrDefault(s.charAt(startIndex), 0) + 1);
+                targetCharsRemaining++;
+                startIndex++;
+            }
+        }
+
+        return minWindow[1] >= s.length() ? "" : s.substring(minWindow[0], minWindow[1] + 1);
     }
     }
