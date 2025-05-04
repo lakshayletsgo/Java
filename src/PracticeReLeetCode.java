@@ -533,17 +533,30 @@ public class PracticeReLeetCode {
 
 
 
+//
+//    public int[] maxSlidingWindow(int[] nums, int k) {
+//        List<Integer> ans = new ArrayList<>();
+//        Deque<Integer> deq=new LinkedList<>();
+//        for(int i=0;i<nums.length;i++){
+//            int num=nums[i];
+//            while(!deq.isEmpty()&&deq.getLast()<num)deq.pollLast();
+//            deq.addLast(num);
+//            if(i>=k&&nums[i-k]==deq.getFirst())deq.pollFirst();
+//            if(i>=k-1){ans.add(deq.getFirst());
+//            }
+//        }
+//        return ans.stream().mapToInt(i->i).toArray();}
 
-    public int[] maxSlidingWindow(int[] nums, int k) {
-        List<Integer> ans = new ArrayList<>();
-        Deque<Integer> deq=new LinkedList<>();
-        for(int i=0;i<nums.length;i++){
-            int num=nums[i];
-            while(!deq.isEmpty()&&deq.getLast()<num)deq.pollLast();
-            deq.addLast(num);
-            if(i>=k&&nums[i-k]==deq.getFirst())deq.pollFirst();
-            if(i>=k-1){ans.add(deq.getFirst());
-            }
+    public ListNode reverseList(ListNode head) {
+        if(head==null||head.next==null)return head;
+        ListNode next= null;
+        ListNode prev= null;
+        while(head!=null){
+            next = head.next;
+            head.next= prev;
+            prev= head;
+            head= next;
         }
-        return ans.stream().mapToInt(i->i).toArray();}
+        return prev;
+    }
 }
