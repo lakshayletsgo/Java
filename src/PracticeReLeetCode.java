@@ -602,9 +602,6 @@ public class PracticeReLeetCode {
                 p3 = p3.next;
             }
         }
-
-
-
         return newHead;
     }
 }
