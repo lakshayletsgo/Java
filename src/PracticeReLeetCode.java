@@ -609,41 +609,59 @@ public class PracticeReLeetCode {
 
 
 
-    public void reorderList(ListNode head) {
-        if(head==null||head.next==null)return;
-        ListNode mid = getMid(head);
-        ListNode midHead= reverseMid(mid);
-        mergeMid(head,midHead);
-    }
-    public ListNode getMid(ListNode head){
-        ListNode fast=head;
-        ListNode slow = head;
-        ListNode prev= slow;
-        while(fast!=null&&fast.next!=null){
-            prev= slow;
-            slow =slow.next;
-            fast= fast.next.next;
+//    public void reorderList(ListNode head) {
+//        if(head==null||head.next==null)return;
+//        ListNode mid = getMid(head);
+//        ListNode midHead= reverseMid(mid);
+//        mergeMid(head,midHead);
+//    }
+//    public ListNode getMid(ListNode head){
+//        ListNode fast=head;
+//        ListNode slow = head;
+//        ListNode prev= slow;
+//        while(fast!=null&&fast.next!=null){
+//            prev= slow;
+//            slow =slow.next;
+//            fast= fast.next.next;
+//        }
+//        prev.next= null;
+//        return slow;
+//    }
+//    public ListNode reverseMid(ListNode head){
+//        ListNode prev= null;
+//        ListNode next= null;
+//        while(head!=null){
+//            next= head.next;
+//            head.next= prev;
+//            prev= head;
+//            head= next;
+//        }
+//        return prev;
+//    }
+//    public void mergeMid(ListNode list1, ListNode list2){
+//        while(list2!=null){
+//            ListNode next= list1.next;
+//            list1.next= list2;
+//            list1= list2;
+//            list2= next;
+//        }
+//    }
+
+
+
+
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        ListNode temp =head;
+        ListNode temp2 =head;
+        ListNode prev=null;
+        for(int i=1;i<=n;i++)temp=temp.next;
+        if(temp==null)return head.next;
+        while(temp!=null){
+            prev= temp2;
+            temp = temp.next;
+            temp2= temp2.next;
         }
-        prev.next= null;
-        return slow;
-    }
-    public ListNode reverseMid(ListNode head){
-        ListNode prev= null;
-        ListNode next= null;
-        while(head!=null){
-            next= head.next;
-            head.next= prev;
-            prev= head;
-            head= next;
-        }
-        return prev;
-    }
-    public void mergeMid(ListNode list1, ListNode list2){
-        while(list2!=null){
-            ListNode next= list1.next;
-            list1.next= list2;
-            list1= list2;
-            list2= next;
-        }
+        prev.next= temp2.next;
+        return head;
     }
 }
