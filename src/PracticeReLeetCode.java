@@ -650,18 +650,38 @@ public class PracticeReLeetCode {
 
 
 
-    public ListNode removeNthFromEnd(ListNode head, int n) {
-        ListNode temp =head;
-        ListNode temp2 =head;
-        ListNode prev=null;
-        for(int i=1;i<=n;i++)temp=temp.next;
-        if(temp==null)return head.next;
-        while(temp!=null){
-            prev= temp2;
-            temp = temp.next;
-            temp2= temp2.next;
+//    public ListNode removeNthFromEnd(ListNode head, int n) {
+//        ListNode temp =head;
+//        ListNode temp2 =head;
+//        ListNode prev=null;
+//        for(int i=1;i<=n;i++)temp=temp.next;
+//        if(temp==null)return head.next;
+//        while(temp!=null){
+//            prev= temp2;
+//            temp = temp.next;
+//            temp2= temp2.next;
+//        }
+//        prev.next= temp2.next;
+//        return head;
+//    }
+
+
+
+    public Node copyRandomList(Node head) {
+        HashMap<Node,Node> map = new HashMap<>();
+        if(head==null)return null;
+        Node curr= head;
+        while(curr!=null){
+            map.put(curr,new Node(curr.val));
+            curr= curr.next;
         }
-        prev.next= temp2.next;
-        return head;
+        curr= head;
+        while(curr!=null){
+            Node copied = map.get(curr);
+            copied.next= map.get(curr.next);
+            copied.random = map.get(curr.random);
+            curr= curr.next;
+        }
+        return map.get(head);
     }
 }
