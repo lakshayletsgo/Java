@@ -667,21 +667,38 @@ public class PracticeReLeetCode {
 
 
 
-    public Node copyRandomList(Node head) {
-        HashMap<Node,Node> map = new HashMap<>();
-        if(head==null)return null;
-        Node curr= head;
-        while(curr!=null){
-            map.put(curr,new Node(curr.val));
-            curr= curr.next;
-        }
-        curr= head;
-        while(curr!=null){
-            Node copied = map.get(curr);
-            copied.next= map.get(curr.next);
-            copied.random = map.get(curr.random);
-            curr= curr.next;
-        }
-        return map.get(head);
+//    public Node copyRandomList(Node head) {
+//        HashMap<Node,Node> map = new HashMap<>();
+//        if(head==null)return null;
+//        Node curr= head;
+//        while(curr!=null){
+//            map.put(curr,new Node(curr.val));
+//            curr= curr.next;
+//        }
+//        curr= head;
+//        while(curr!=null){
+//            Node copied = map.get(curr);
+//            copied.next= map.get(curr.next);
+//            copied.random = map.get(curr.random);
+//            curr= curr.next;
+//        }
+//        return map.get(head);
+//    }
+
+
+
+
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        return helper(l1,l2,0);
+    }
+    public ListNode helper(ListNode l1, ListNode l2, int carry){
+        if(l1==null&&l2==null&&carry==0)return null;
+        int val1 = l1==null?0:l1.val;
+        int val2 = l2==null?0:l2.val;
+        int sum  = val1+val2+carry;
+        carry=sum/10;
+        ListNode node = new ListNode(sum%10);
+        node.next= helper(l1==null?null:l1.next,l2==null?null:l2.next,carry);
+        return node;
     }
 }
