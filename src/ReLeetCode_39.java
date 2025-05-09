@@ -15,7 +15,7 @@ public class ReLeetCode_39 {
         int sum = val2+val1+carry;
         carry = sum/10;
         ListNode node = new ListNode(sum%10);
-        node.next = helper(l1==null?null:l1,l2==null?null:l2,carry);
+        node.next = helper(l1==null?null:l1.next,l2==null?null:l2.next,carry);
         return node;
     }
 }
