@@ -703,15 +703,31 @@ public class PracticeReLeetCode {
 //    }
 
 
-    public boolean hasCycle(ListNode head) {
-        if(head==null||head.next==null)return false;
-        ListNode fast= head;
-        ListNode slow = head;
-        while(fast!=null&&fast.next!=null){
-            fast= fast.next.next;
-            slow = slow.next;
-            if(fast==slow)return true;
+//    public boolean hasCycle(ListNode head) {
+//        if(head==null||head.next==null)return false;
+//        ListNode fast= head;
+//        ListNode slow = head;
+//        while(fast!=null&&fast.next!=null){
+//            fast= fast.next.next;
+//            slow = slow.next;
+//            if(fast==slow)return true;
+//        }
+//        return false;
+//    }
+
+
+    public int findDuplicate(int[] nums) {
+        int fast = nums[0];
+        int slow =  nums[0];
+        do{
+            fast= nums[nums[fast]];
+            slow = nums[slow];
+        }while(slow!=fast);
+        fast=nums[0];
+        while(fast!=slow){
+            fast= nums[fast];
+            slow= nums[slow];
         }
-        return false;
+        return fast;
     }
 }
