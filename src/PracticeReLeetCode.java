@@ -729,55 +729,85 @@ public class PracticeReLeetCode {
 //            slow= nums[slow];
 //        }
 //        return fast;
+
+//    }
+
+}
+//class LRUCache {
+//
+//    private class Node{
+//        Node prev, next;
+//        int key, val;
+//        Node(int key, int val){
+//            this.key = key;
+//            this.val= val;
+//        }
+//    }
+//    int capacity;
+//    Node head= new Node(0,0),tail = new Node(0,0);
+//    Map<Integer,Node> map = new HashMap<>();
+//    public LRUCache(int capacity) {
+//        this.capacity=capacity;
+//        head.next= tail;
+//        tail.prev= head;
+//    }
+//
+//    public int get(int key) {
+//        if(map.containsKey(key)){
+//            Node data= map.get(key);
+//            remove(data);
+//            insert(data);
+//            return data.val;
+//        }
+//        return -1;
+//    }
+//
+//    public void put(int key, int value) {
+//        if(map.containsKey(key))remove(map.get(key));
+//        if(map.size()==capacity)remove(tail.prev);
+//        insert(new Node(key,value));
+//    }
+//    void insert(Node node){
+//        map.put(node.key,node);
+//        Node headNext = head.next;
+//        head.next = node;
+//        node.prev = head;
+//        headNext.prev= node;
+//        node.next = headNext;
+//    }
+//    void remove(Node node){
+//        map.remove(node.key);
+//        node.prev.next = node.next;
+//        node.next.prev = node.prev;
 //    }
 
 
-    class LRUCache {
-
-        private class Node{
-            Node prev, next;
-            int key, val;
-            Node(int key, int val){
-                this.key = key;
-                this.val= val;
-            }
+    public ListNode mergeKLists(ListNode[] lists) {
+    if(lists.length==0||lists==null)return null;
+    return helper(lists,0,lists.length-1);
+}
+private ListNode helper(ListNode[]lists,int start, int end){
+    if(start==end)return lists[start];
+    if(start+1==end)return merge(lists[start],lists[end]);
+    int mid = start+(end-start)/2;
+    ListNode leftList = helper(lists,start,mid);
+    ListNode rightList = helper(lists,mid+1,end);
+    return merge(leftList,rightList);
+}
+private ListNode merge(ListNode leftList, ListNode rightList){
+    ListNode temp = new ListNode(0);
+    ListNode curr = temp;
+    while(leftList!=null&&rightList!=null){
+        if(leftList.val<rightList.val){
+            curr.next = leftList;
+            leftList = leftList.next;
+        }else{
+            curr.next = rightList;
+            rightList = rightList.next;
         }
-        int capacity;
-        Node head= new Node(0,0),tail = new Node(0,0);
-        Map<Integer,Node> map = new HashMap<>();
-        public LRUCache(int capacity) {
-            this.capacity=capacity;
-            head.next= tail;
-            tail.prev= head;
-        }
-
-        public int get(int key) {
-            if(map.containsKey(key)){
-                Node data= map.get(key);
-                remove(data);
-                insert(data);
-                return data.val;
-            }
-            return -1;
-        }
-
-        public void put(int key, int value) {
-            if(map.containsKey(key))remove(map.get(key));
-            if(map.size()==capacity)remove(tail.prev);
-            insert(new Node(key,value));
-        }
-        void insert(Node node){
-            map.put(node.key,node);
-            Node headNext = head.next;
-            head.next = node;
-            node.prev = head;
-            headNext.prev= node;
-            node.next = headNext;
-        }
-        void remove(Node node){
-            map.remove(node.key);
-            node.prev.next = node.next;
-            node.next.prev = node.prev;
-        }
+        curr= curr.next;
     }
+    curr.next = leftList==null?rightList:leftList;
+    return temp.next;
+}
 }
