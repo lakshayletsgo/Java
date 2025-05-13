@@ -781,33 +781,69 @@ public class PracticeReLeetCode {
 //        node.next.prev = node.prev;
 //    }
 
+//
+//    public ListNode mergeKLists(ListNode[] lists) {
+//    if(lists.length==0||lists==null)return null;
+//    return helper(lists,0,lists.length-1);
+//}
+//private ListNode helper(ListNode[]lists,int start, int end){
+//    if(start==end)return lists[start];
+//    if(start+1==end)return merge(lists[start],lists[end]);
+//    int mid = start+(end-start)/2;
+//    ListNode leftList = helper(lists,start,mid);
+//    ListNode rightList = helper(lists,mid+1,end);
+//    return merge(leftList,rightList);
+//}
+//private ListNode merge(ListNode leftList, ListNode rightList){
+//    ListNode temp = new ListNode(0);
+//    ListNode curr = temp;
+//    while(leftList!=null&&rightList!=null){
+//        if(leftList.val<rightList.val){
+//            curr.next = leftList;
+//            leftList = leftList.next;
+//        }else{
+//            curr.next = rightList;
+//            rightList = rightList.next;
+//        }
+//        curr= curr.next;
+//    }
+//    curr.next = leftList==null?rightList:leftList;
+//    return temp.next;
+//}
 
-    public ListNode mergeKLists(ListNode[] lists) {
-    if(lists.length==0||lists==null)return null;
-    return helper(lists,0,lists.length-1);
-}
-private ListNode helper(ListNode[]lists,int start, int end){
-    if(start==end)return lists[start];
-    if(start+1==end)return merge(lists[start],lists[end]);
-    int mid = start+(end-start)/2;
-    ListNode leftList = helper(lists,start,mid);
-    ListNode rightList = helper(lists,mid+1,end);
-    return merge(leftList,rightList);
-}
-private ListNode merge(ListNode leftList, ListNode rightList){
-    ListNode temp = new ListNode(0);
-    ListNode curr = temp;
-    while(leftList!=null&&rightList!=null){
-        if(leftList.val<rightList.val){
-            curr.next = leftList;
-            leftList = leftList.next;
-        }else{
-            curr.next = rightList;
-            rightList = rightList.next;
-        }
-        curr= curr.next;
+
+int length =0;
+boolean flag = true;
+public ListNode reverseKGroup(ListNode head, int k) {
+    if(flag){
+        flag = false;
+        ListNode p = head;
+        length = getLength(head);
     }
-    curr.next = leftList==null?rightList:leftList;
-    return temp.next;
+    int temp = k;
+    ListNode curr = head;
+    ListNode prev = null;
+    ListNode next = curr.next;
+    while(temp>0&&curr!=null){
+        next = curr.next;
+        curr.next = prev;
+        prev = curr;
+        curr = next;
+        temp--;
+    }
+    length-=k;
+    if(curr!=null){
+        if(length>=k)head.next = reverseKGroup(curr,k);
+        else head.next = curr;
+    }
+    return prev;
 }
+private int getLength(ListNode head){
+    int c=0;
+    while(head!=null){
+        head = head.next;
+        c++;
+    }return c;}
+
+
 }
