@@ -812,38 +812,49 @@ public class PracticeReLeetCode {
 //}
 
 
-int length =0;
-boolean flag = true;
-public ListNode reverseKGroup(ListNode head, int k) {
-    if(flag){
-        flag = false;
-        ListNode p = head;
-        length = getLength(head);
-    }
-    int temp = k;
-    ListNode curr = head;
-    ListNode prev = null;
-    ListNode next = curr.next;
-    while(temp>0&&curr!=null){
-        next = curr.next;
-        curr.next = prev;
-        prev = curr;
-        curr = next;
-        temp--;
-    }
-    length-=k;
-    if(curr!=null){
-        if(length>=k)head.next = reverseKGroup(curr,k);
-        else head.next = curr;
-    }
-    return prev;
+//int length =0;
+//boolean flag = true;
+//public ListNode reverseKGroup(ListNode head, int k) {
+//    if(flag){
+//        flag = false;
+//        ListNode p = head;
+//        length = getLength(head);
+//    }
+//    int temp = k;
+//    ListNode curr = head;
+//    ListNode prev = null;
+//    ListNode next = curr.next;
+//    while(temp>0&&curr!=null){
+//        next = curr.next;
+//        curr.next = prev;
+//        prev = curr;
+//        curr = next;
+//        temp--;
+//    }
+//    length-=k;
+//    if(curr!=null){
+//        if(length>=k)head.next = reverseKGroup(curr,k);
+//        else head.next = curr;
+//    }
+//    return prev;
+//}
+//private int getLength(ListNode head){
+//    int c=0;
+//    while(head!=null){
+//        head = head.next;
+//        c++;
+//    }return c;}
+//
+
+
+
+private TreeNode invertTree(TreeNode root) {
+    if(root==null)return null;
+    TreeNode temp = root.left;
+    root.left = root.right;
+    root.right = temp;
+    invertTree(root.left);
+    invertTree(root.right);
+    return root;
 }
-private int getLength(ListNode head){
-    int c=0;
-    while(head!=null){
-        head = head.next;
-        c++;
-    }return c;}
-
-
 }
