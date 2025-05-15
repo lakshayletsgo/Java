@@ -2,6 +2,10 @@ import java.util.*;
 
 public class PracticeReLeetCode {
 
+    public int maxDepth(TreeNode root) {
+        if(root==null)return 0;
+        return 1+Math.max(maxDepth(root.left),maxDepth(root.right));
+    }}
 
 
 //    public boolean isValidSudoku(char[][] board) {
@@ -732,7 +736,7 @@ public class PracticeReLeetCode {
 
 //    }
 
-}
+
 //class LRUCache {
 //
 //    private class Node{
@@ -848,13 +852,14 @@ public class PracticeReLeetCode {
 
 
 
-private TreeNode invertTree(TreeNode root) {
-    if(root==null)return null;
-    TreeNode temp = root.left;
-    root.left = root.right;
-    root.right = temp;
-    invertTree(root.left);
-    invertTree(root.right);
-    return root;
-}
-}
+//private TreeNode invertTree(TreeNode root) {
+//    if(root==null)return null;
+//    TreeNode temp = root.left;
+//    root.left = root.right;
+//    root.right = temp;
+//    invertTree(root.left);
+//    invertTree(root.right);
+//    return root;
+//}
+
+
