@@ -2,10 +2,34 @@ import java.util.*;
 
 public class PracticeReLeetCode {
 
-    public int maxDepth(TreeNode root) {
-        if(root==null)return 0;
-        return 1+Math.max(maxDepth(root.left),maxDepth(root.right));
-    }}
+//    public int maxDepth(TreeNode root) {
+//        if(root==null)return 0;
+//        return 1+Math.max(maxDepth(root.left),maxDepth(root.right));
+//    }
+
+    private int diameter = 0; // To store the maximum diameter
+
+    public int diameterOfBinaryTree(TreeNode root) {
+        calculateDepth(root);
+        return diameter;
+    }
+
+    private int calculateDepth(TreeNode node) {
+        if (node == null) {
+            return 0; // Base case: depth of an empty tree is 0
+        }
+
+        // Recursively find the depth of the left and right subtrees
+        int leftDepth = calculateDepth(node.left);
+        int rightDepth = calculateDepth(node.right);
+
+        // Update the diameter at the current node
+        diameter = Math.max(diameter, leftDepth + rightDepth);
+
+        // Return the depth of the current subtree
+        return 1 + Math.max(leftDepth, rightDepth);
+    }
+}
 
 
 //    public boolean isValidSudoku(char[][] board) {
