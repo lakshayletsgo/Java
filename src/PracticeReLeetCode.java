@@ -7,27 +7,43 @@ public class PracticeReLeetCode {
 //        return 1+Math.max(maxDepth(root.left),maxDepth(root.right));
 //    }
 
-    private int diameter = 0; // To store the maximum diameter
+//    private int diameter = 0; // To store the maximum diameter
+//
+//    public int diameterOfBinaryTree(TreeNode root) {
+//        calculateDepth(root);
+//        return diameter;
+//    }
+//
+//    private int calculateDepth(TreeNode node) {
+//        if (node == null) {
+//            return 0; // Base case: depth of an empty tree is 0
+//        }
+//
+//        // Recursively find the depth of the left and right subtrees
+//        int leftDepth = calculateDepth(node.left);
+//        int rightDepth = calculateDepth(node.right);
+//
+//        // Update the diameter at the current node
+//        diameter = Math.max(diameter, leftDepth + rightDepth);
+//
+//        // Return the depth of the current subtree
+//        return 1 + Math.max(leftDepth, rightDepth);
+//    }
 
-    public int diameterOfBinaryTree(TreeNode root) {
-        calculateDepth(root);
-        return diameter;
+
+
+
+    public int getHeight(TreeNode root){
+        if (root==null)return 0;
+        int left = getHeight(root.left);
+        int right = getHeight(root.right);
+        return left==-1||right==-1||(Math.abs(left-right)>1)?-1:1+Math.max(left,right);
     }
 
-    private int calculateDepth(TreeNode node) {
-        if (node == null) {
-            return 0; // Base case: depth of an empty tree is 0
-        }
-
-        // Recursively find the depth of the left and right subtrees
-        int leftDepth = calculateDepth(node.left);
-        int rightDepth = calculateDepth(node.right);
-
-        // Update the diameter at the current node
-        diameter = Math.max(diameter, leftDepth + rightDepth);
-
-        // Return the depth of the current subtree
-        return 1 + Math.max(leftDepth, rightDepth);
+    public boolean isBalanced(TreeNode root) {
+        if (root==null) return true;
+        if (getHeight(root)==-1)return false;
+        return true;
     }
 }
 
