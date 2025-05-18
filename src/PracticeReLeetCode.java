@@ -33,17 +33,26 @@ public class PracticeReLeetCode {
 
 
 
-    public int getHeight(TreeNode root){
-        if (root==null)return 0;
-        int left = getHeight(root.left);
-        int right = getHeight(root.right);
-        return left==-1||right==-1||(Math.abs(left-right)>1)?-1:1+Math.max(left,right);
-    }
+//    public int getHeight(TreeNode root){
+//        if (root==null)return 0;
+//        int left = getHeight(root.left);
+//        int right = getHeight(root.right);
+//        return left==-1||right==-1||(Math.abs(left-right)>1)?-1:1+Math.max(left,right);
+//    }
+//
+//    public boolean isBalanced(TreeNode root) {
+//        if (root==null) return true;
+//        if (getHeight(root)==-1)return false;
+//        return true;
+//    }
 
-    public boolean isBalanced(TreeNode root) {
-        if (root==null) return true;
-        if (getHeight(root)==-1)return false;
-        return true;
+
+
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        if (p==null||q==null){
+            return p==q;
+        }
+        return p.val==q.val&&isSameTree(p.left,q.left)&&isSameTree(p.right,q.right);
     }
 }
 
