@@ -55,23 +55,31 @@ public class PracticeReLeetCode {
 //        return p.val==q.val&&isSameTree(p.left,q.left)&&isSameTree(p.right,q.right);
 //    }
 
-    public boolean isSubtree(TreeNode root, TreeNode subRoot) {
-        if (root == null) {
-            return false;
-        }
-        if (root.val==subRoot.val&&sameTree(root,subRoot)){
-            return true;
-        }
-        return isSubtree(root.left,subRoot)||isSubtree(root.right,subRoot);
-    }
-    private boolean sameTree(TreeNode root,TreeNode subRoot){
-        if (root==null&&subRoot==null){
-            return true;
-        }
-        if (root==null||subRoot==null||root.val!=subRoot.val){
-            return false;
-        }
-        return sameTree(root.left,subRoot.left)&&sameTree(root.right,subRoot.right);
+//    public boolean isSubtree(TreeNode root, TreeNode subRoot) {
+//        if (root == null) {
+//            return false;
+//        }
+//        if (root.val==subRoot.val&&sameTree(root,subRoot)){
+//            return true;
+//        }
+//        return isSubtree(root.left,subRoot)||isSubtree(root.right,subRoot);
+//    }
+//    private boolean sameTree(TreeNode root,TreeNode subRoot){
+//        if (root==null&&subRoot==null){
+//            return true;
+//        }
+//        if (root==null||subRoot==null||root.val!=subRoot.val){
+//            return false;
+//        }
+//        return sameTree(root.left,subRoot.left)&&sameTree(root.right,subRoot.right);
+//    }
+
+
+    public int minDepth(TreeNode root) {
+        if (root==null) return 0;
+        int left = minDepth(root.left);
+        int right = minDepth(root.right);
+        return (left==0||right==0)?left+right+1:1+(Math.min(left,right));
     }
 }
 
