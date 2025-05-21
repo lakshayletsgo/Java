@@ -75,11 +75,25 @@ public class PracticeReLeetCode {
 //    }
 
 
-    public int minDepth(TreeNode root) {
-        if (root==null) return 0;
-        int left = minDepth(root.left);
-        int right = minDepth(root.right);
-        return (left==0||right==0)?left+right+1:1+(Math.min(left,right));
+//    public int minDepth(TreeNode root) {
+//        if (root==null) return 0;
+//        int left = minDepth(root.left);
+//        int right = minDepth(root.right);
+//        return (left==0||right==0)?left+right+1:1+(Math.min(left,right));
+//    }
+
+    TreeNode prev;
+    int diff = Integer.MAX_VALUE;
+    public int getMinimumDifference(TreeNode root) {
+        dfs(root);
+        return diff;
+    }
+    public void dfs(TreeNode root){
+        if(root==null)return ;
+        dfs(root.left);
+        if(prev!=null)diff = Math.min(diff,root.val-prev.val);
+        prev = root;
+        dfs(root.right);
     }
 }
 
