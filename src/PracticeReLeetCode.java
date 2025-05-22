@@ -82,19 +82,35 @@ public class PracticeReLeetCode {
 //        return (left==0||right==0)?left+right+1:1+(Math.min(left,right));
 //    }
 
-    TreeNode prev;
-    int diff = Integer.MAX_VALUE;
-    public int getMinimumDifference(TreeNode root) {
-        dfs(root);
-        return diff;
+//    TreeNode prev;
+//    int diff = Integer.MAX_VALUE;
+//    public int getMinimumDifference(TreeNode root) {
+//        dfs(root);
+//        return diff;
+//    }
+//    public void dfs(TreeNode root){
+//        if(root==null)return ;
+//        dfs(root.left);
+//        if(prev!=null)diff = Math.min(diff,root.val-prev.val);
+//        prev = root;
+//        dfs(root.right);
+//    }
+
+
+
+    int topNodeVal;
+    public boolean isUnivalTree(TreeNode root) {
+        topNodeVal= root.val;
+        return helper(root);
     }
-    public void dfs(TreeNode root){
-        if(root==null)return ;
-        dfs(root.left);
-        if(prev!=null)diff = Math.min(diff,root.val-prev.val);
-        prev = root;
-        dfs(root.right);
+    private boolean helper(TreeNode root){
+        if(root==null)return true;
+        return root.val==topNodeVal&&helper(root.left)&&helper(root.right);
     }
+
+
+
+
 }
 
 
