@@ -98,14 +98,23 @@ public class PracticeReLeetCode {
 
 
 
-    int topNodeVal;
-    public boolean isUnivalTree(TreeNode root) {
-        topNodeVal= root.val;
-        return helper(root);
-    }
-    private boolean helper(TreeNode root){
-        if(root==null)return true;
-        return root.val==topNodeVal&&helper(root.left)&&helper(root.right);
+//    int topNodeVal;
+//    public boolean isUnivalTree(TreeNode root) {
+//        topNodeVal= root.val;
+//        return helper(root);
+//    }
+//    private boolean helper(TreeNode root){
+//        if(root==null)return true;
+//        return root.val==topNodeVal&&helper(root.left)&&helper(root.right);
+//    }
+
+
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        if(root==null||root==p||root==q)return root;
+        TreeNode left= lowestCommonAncestor(root.left,p,q);
+        TreeNode right= lowestCommonAncestor(root.right,p,q);
+        if(left!=null&&right!=null)return root;
+        return left==null?right:left;
     }
 
 
