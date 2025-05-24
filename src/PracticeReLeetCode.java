@@ -109,12 +109,31 @@ public class PracticeReLeetCode {
 //    }
 
 
-    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
-        if(root==null||root==p||root==q)return root;
-        TreeNode left= lowestCommonAncestor(root.left,p,q);
-        TreeNode right= lowestCommonAncestor(root.right,p,q);
-        if(left!=null&&right!=null)return root;
-        return left==null?right:left;
+//    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+//        if(root==null||root==p||root==q)return root;
+//        TreeNode left= lowestCommonAncestor(root.left,p,q);
+//        TreeNode right= lowestCommonAncestor(root.right,p,q);
+//        if(left!=null&&right!=null)return root;
+//        return left==null?right:left;
+//    }
+
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> ans = new ArrayList<>();
+        Queue<TreeNode> queue = new LinkedList<>();
+        if(root==null)return ans;
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            int levelSize = queue.size();
+            List<Integer> level = new ArrayList<>();
+            for(int i=0;i<levelSize;i++){
+                TreeNode curr = queue.poll();
+                level.add(curr.val);
+                if(curr.left!=null) queue.add(curr.left);
+                if(curr.right!=null)queue.add(curr.right);
+            }
+            ans.add(level);
+        }
+        return ans;
     }
 
 
