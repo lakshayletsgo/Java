@@ -117,21 +117,43 @@ public class PracticeReLeetCode {
 //        return left==null?right:left;
 //    }
 
-    public List<List<Integer>> levelOrder(TreeNode root) {
-        List<List<Integer>> ans = new ArrayList<>();
-        Queue<TreeNode> queue = new LinkedList<>();
+//    public List<List<Integer>> levelOrder(TreeNode root) {
+//        List<List<Integer>> ans = new ArrayList<>();
+//        Queue<TreeNode> queue = new LinkedList<>();
+//        if(root==null)return ans;
+//        queue.offer(root);
+//        while(!queue.isEmpty()){
+//            int levelSize = queue.size();
+//            List<Integer> level = new ArrayList<>();
+//            for(int i=0;i<levelSize;i++){
+//                TreeNode curr = queue.poll();
+//                level.add(curr.val);
+//                if(curr.left!=null) queue.add(curr.left);
+//                if(curr.right!=null)queue.add(curr.right);
+//            }
+//            ans.add(level);
+//        }
+//        return ans;
+//    }
+
+
+
+    public List<Integer> rightSideView(TreeNode root) {
+
+        List<Integer> ans = new ArrayList<>();
+        Queue<TreeNode> queue  = new LinkedList<>();
         if(root==null)return ans;
-        queue.offer(root);
+        queue.add(root);
         while(!queue.isEmpty()){
             int levelSize = queue.size();
             List<Integer> level = new ArrayList<>();
             for(int i=0;i<levelSize;i++){
                 TreeNode curr = queue.poll();
                 level.add(curr.val);
-                if(curr.left!=null) queue.add(curr.left);
+                if(curr.left!=null)queue.add(curr.left);
                 if(curr.right!=null)queue.add(curr.right);
             }
-            ans.add(level);
+            ans.add(level.getLast());
         }
         return ans;
     }
