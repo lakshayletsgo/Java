@@ -138,24 +138,36 @@ public class PracticeReLeetCode {
 
 
 
-    public List<Integer> rightSideView(TreeNode root) {
+//    public List<Integer> rightSideView(TreeNode root) {
+//
+//        List<Integer> ans = new ArrayList<>();
+//        Queue<TreeNode> queue  = new LinkedList<>();
+//        if(root==null)return ans;
+//        queue.add(root);
+//        while(!queue.isEmpty()){
+//            int levelSize = queue.size();
+//            List<Integer> level = new ArrayList<>();
+//            for(int i=0;i<levelSize;i++){
+//                TreeNode curr = queue.poll();
+//                level.add(curr.val);
+//                if(curr.left!=null)queue.add(curr.left);
+//                if(curr.right!=null)queue.add(curr.right);
+//            }
+//            ans.add(level.getLast());
+//        }
+//        return ans;
+//    }
 
-        List<Integer> ans = new ArrayList<>();
-        Queue<TreeNode> queue  = new LinkedList<>();
-        if(root==null)return ans;
-        queue.add(root);
-        while(!queue.isEmpty()){
-            int levelSize = queue.size();
-            List<Integer> level = new ArrayList<>();
-            for(int i=0;i<levelSize;i++){
-                TreeNode curr = queue.poll();
-                level.add(curr.val);
-                if(curr.left!=null)queue.add(curr.left);
-                if(curr.right!=null)queue.add(curr.right);
-            }
-            ans.add(level.getLast());
-        }
-        return ans;
+
+
+
+    public int goodNodes(TreeNode root) {
+        return root==null?0:helper(root,root.val);
+    }
+    public int helper(TreeNode root, int temp){
+        if(root==null)return 0;
+        temp = Math.max(root.val,temp);
+        return root.val>=temp?1+helper(root.left,temp)+helper(root.right,temp):helper(root.left,temp)+helper(root.right,temp);
     }
 
 
