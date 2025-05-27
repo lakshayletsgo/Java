@@ -161,13 +161,25 @@ public class PracticeReLeetCode {
 
 
 
-    public int goodNodes(TreeNode root) {
-        return root==null?0:helper(root,root.val);
+//    public int goodNodes(TreeNode root) {
+//        return root==null?0:helper(root,root.val);
+//    }
+//    public int helper(TreeNode root, int temp){
+//        if(root==null)return 0;
+//        temp = Math.max(root.val,temp);
+//        return root.val>=temp?1+helper(root.left,temp)+helper(root.right,temp):helper(root.left,temp)+helper(root.right,temp);
+//    }
+
+
+
+    public boolean isValidBST(TreeNode root) {
+        return helper(root,Long.MIN_VALUE,Long.MAX_VALUE);
     }
-    public int helper(TreeNode root, int temp){
-        if(root==null)return 0;
-        temp = Math.max(root.val,temp);
-        return root.val>=temp?1+helper(root.left,temp)+helper(root.right,temp):helper(root.left,temp)+helper(root.right,temp);
+
+    private boolean helper(TreeNode root,long min, long max){
+        if(root==null)return true;
+        if(root.val<=min||root.val>=max)return false;
+        return helper(root.right,root.val,max)&&helper(root.left,min,root.val);
     }
 
 
