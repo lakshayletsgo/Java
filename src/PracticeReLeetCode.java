@@ -172,14 +172,29 @@ public class PracticeReLeetCode {
 
 
 
-    public boolean isValidBST(TreeNode root) {
-        return helper(root,Long.MIN_VALUE,Long.MAX_VALUE);
-    }
+//    public boolean isValidBST(TreeNode root) {
+//        return helper(root,Long.MIN_VALUE,Long.MAX_VALUE);
+//    }
+//
+//    private boolean helper(TreeNode root,long min, long max){
+//        if(root==null)return true;
+//        if(root.val<=min||root.val>=max)return false;
+//        return helper(root.right,root.val,max)&&helper(root.left,min,root.val);
+//    }
 
-    private boolean helper(TreeNode root,long min, long max){
-        if(root==null)return true;
-        if(root.val<=min||root.val>=max)return false;
-        return helper(root.right,root.val,max)&&helper(root.left,min,root.val);
+
+    public int peakIndexInMountainArray(int[] arr) {
+        int start =0;
+        int end = arr.length-1;
+        while(start<end){
+            int mid = start+(end-start)/2;
+            if(arr[mid]>arr[mid+1]){
+                end =mid;
+            }else{
+                start = mid+1;
+            }
+        }
+        return start;
     }
 
 
