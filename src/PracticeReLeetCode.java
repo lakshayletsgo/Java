@@ -183,18 +183,38 @@ public class PracticeReLeetCode {
 //    }
 
 
-    public int peakIndexInMountainArray(int[] arr) {
-        int start =0;
-        int end = arr.length-1;
-        while(start<end){
-            int mid = start+(end-start)/2;
-            if(arr[mid]>arr[mid+1]){
-                end =mid;
-            }else{
-                start = mid+1;
-            }
+//    public int peakIndexInMountainArray(int[] arr) {
+//        int start =0;
+//        int end = arr.length-1;
+//        while(start<end){
+//            int mid = start+(end-start)/2;
+//            if(arr[mid]>arr[mid+1]){
+//                end =mid;
+//            }else{
+//                start = mid+1;
+//            }
+//        }
+//        return start;
+//    }
+
+
+
+
+    int index = 0;
+    int count = 0;
+    public int kthSmallest(TreeNode root, int k) {
+        count = k;
+        helper(root, k);
+        return index;
+    }
+    public void helper(TreeNode root, int k){
+        if(root.left!=null)helper(root.left,k);
+        count--;
+        if(count==0){
+            index = root.val;
+            return;
         }
-        return start;
+        if(root.right!=null)helper(root.right,k);
     }
 
 
