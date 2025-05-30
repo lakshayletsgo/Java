@@ -200,21 +200,37 @@ public class PracticeReLeetCode {
 
 
 
-    int index = 0;
-    int count = 0;
-    public int kthSmallest(TreeNode root, int k) {
-        count = k;
-        helper(root, k);
-        return index;
+//    int index = 0;
+//    int count = 0;
+//    public int kthSmallest(TreeNode root, int k) {
+//        count = k;
+//        helper(root, k);
+//        return index;
+//    }
+//    public void helper(TreeNode root, int k){
+//        if(root.left!=null)helper(root.left,k);
+//        count--;
+//        if(count==0){
+//            index = root.val;
+//            return;
+//        }
+//        if(root.right!=null)helper(root.right,k);
+//    }
+
+
+    int preorderIndex= 0;
+    Map<Integer,Integer> map = new HashMap<>();
+    public TreeNode buildTree(int[] preorder, int[] inorder) {
+        for(int i=0;i<inorder.length;i++)map.put(inorder[i],i);
+        return helper(0,preorder.length-1,preorder);
     }
-    public void helper(TreeNode root, int k){
-        if(root.left!=null)helper(root.left,k);
-        count--;
-        if(count==0){
-            index = root.val;
-            return;
-        }
-        if(root.right!=null)helper(root.right,k);
+    private TreeNode helper(int i, int j, int[]preorder){
+        if(preorderIndex>=preorder.length||i>j)return null;
+        TreeNode node = new TreeNode(preorder[preorderIndex]);
+        int index = map.get(preorder[preorderIndex++]);
+        node.left = helper(i,index-1,preorder);
+        node.right = helper(index+1,j,preorder);
+        return node;
     }
 
 
