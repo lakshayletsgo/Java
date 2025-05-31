@@ -218,19 +218,54 @@ public class PracticeReLeetCode {
 //    }
 
 
-    int preorderIndex= 0;
-    Map<Integer,Integer> map = new HashMap<>();
-    public TreeNode buildTree(int[] preorder, int[] inorder) {
-        for(int i=0;i<inorder.length;i++)map.put(inorder[i],i);
-        return helper(0,preorder.length-1,preorder);
+//    int preorderIndex= 0;
+//    Map<Integer,Integer> map = new HashMap<>();
+//    public TreeNode buildTree(int[] preorder, int[] inorder) {
+//        for(int i=0;i<inorder.length;i++)map.put(inorder[i],i);
+//        return helper(0,preorder.length-1,preorder);
+//    }
+//    private TreeNode helper(int i, int j, int[]preorder){
+//        if(preorderIndex>=preorder.length||i>j)return null;
+//        TreeNode node = new TreeNode(preorder[preorderIndex]);
+//        int index = map.get(preorder[preorderIndex++]);
+//        node.left = helper(i,index-1,preorder);
+//        node.right = helper(index+1,j,preorder);
+//        return node;
+//    }
+
+
+
+
+
+
+
+
+
+    private class Pair{
+        TreeNode node;
+        int pos;
+        Pair(TreeNode node,int pos){
+            this.node = node;
+            this.pos = pos;
+        }
     }
-    private TreeNode helper(int i, int j, int[]preorder){
-        if(preorderIndex>=preorder.length||i>j)return null;
-        TreeNode node = new TreeNode(preorder[preorderIndex]);
-        int index = map.get(preorder[preorderIndex++]);
-        node.left = helper(i,index-1,preorder);
-        node.right = helper(index+1,j,preorder);
-        return node;
+    public int widthOfBinaryTree(TreeNode root) {
+        if (root==null)return 0;
+        int result = Integer.MIN_VALUE;
+        ArrayDeque<Pair> deque= new ArrayDeque<>();
+        deque.add(new Pair(root,0));
+        while (!deque.isEmpty()){
+            int size = deque.size();
+            result = Math.max(result,deque.getLast().pos-deque.getFirst().pos+1);
+            for (int i = 0; i < size; i++) {
+                Pair curr = deque.poll();
+                TreeNode node = curr.node;
+                int val  = curr.pos;
+                if (node.left!=null) deque.add(new Pair(node.left,2*val+1));
+                if (node.right!=null) deque.add(new Pair(node.right,2*val+2));
+            }
+        }
+        return result;
     }
 
 
