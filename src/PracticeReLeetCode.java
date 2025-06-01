@@ -241,31 +241,56 @@ public class PracticeReLeetCode {
 
 
 
-    private class Pair{
-        TreeNode node;
-        int pos;
-        Pair(TreeNode node,int pos){
-            this.node = node;
-            this.pos = pos;
+//    private class Pair{
+//        TreeNode node;
+//        int pos;
+//        Pair(TreeNode node,int pos){
+//            this.node = node;
+//            this.pos = pos;
+//        }
+//    }
+//    public int widthOfBinaryTree(TreeNode root) {
+//        if (root==null)return 0;
+//        int result = Integer.MIN_VALUE;
+//        ArrayDeque<Pair> deque= new ArrayDeque<>();
+//        deque.add(new Pair(root,0));
+//        while (!deque.isEmpty()){
+//            int size = deque.size();
+//            result = Math.max(result,deque.getLast().pos-deque.getFirst().pos+1);
+//            for (int i = 0; i < size; i++) {
+//                Pair curr = deque.poll();
+//                TreeNode node = curr.node;
+//                int val  = curr.pos;
+//                if (node.left!=null) deque.add(new Pair(node.left,2*val+1));
+//                if (node.right!=null) deque.add(new Pair(node.right,2*val+2));
+//            }
+//        }
+//        return result;
+//    }
+
+
+
+    public boolean validateBinaryTreeNodes(int n, int[] leftChild, int[] rightChild) {
+        int[] map = new int[n];
+        for(int i=0;i<n;i++){
+            if(leftChild[i]!=-1)map[leftChild[i]]++;
+            if(rightChild[i]!=-1)map[rightChild[i]]++;
         }
-    }
-    public int widthOfBinaryTree(TreeNode root) {
-        if (root==null)return 0;
-        int result = Integer.MIN_VALUE;
-        ArrayDeque<Pair> deque= new ArrayDeque<>();
-        deque.add(new Pair(root,0));
-        while (!deque.isEmpty()){
-            int size = deque.size();
-            result = Math.max(result,deque.getLast().pos-deque.getFirst().pos+1);
-            for (int i = 0; i < size; i++) {
-                Pair curr = deque.poll();
-                TreeNode node = curr.node;
-                int val  = curr.pos;
-                if (node.left!=null) deque.add(new Pair(node.left,2*val+1));
-                if (node.right!=null) deque.add(new Pair(node.right,2*val+2));
-            }
+        int root=-1;
+        for(int i=0;i<n;i++)if(map[i]==0)root=i;
+        if(root==-1)return false;
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(root);
+        boolean[]vis = new boolean[n];
+        while(!queue.isEmpty()){
+            int x = queue.poll();
+            if(vis[x])return false;
+            vis[x]=true;
+            if(leftChild[x]!=-1)queue.add(leftChild[x]);
+            if(rightChild[x]!=-1)queue.add(rightChild[x]);
         }
-        return result;
+        for(boolean i:vis)if(!i)return false;
+        return true;
     }
 
 
