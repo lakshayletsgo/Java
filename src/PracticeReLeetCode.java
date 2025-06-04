@@ -308,20 +308,38 @@ public class PracticeReLeetCode {
 
 
 
-    public TreeNode reverseOddLevels(TreeNode root) {
-        if(root==null)return root;
-        helper(root.left, root.right, 0);
-        return root;
+//    public TreeNode reverseOddLevels(TreeNode root) {
+//        if(root==null)return root;
+//        helper(root.left, root.right, 0);
+//        return root;
+//    }
+//    private void helper(TreeNode left, TreeNode right, int level){
+//        if(left==null||right==null)return ;
+//        if(level%2==0){
+//            int temp = left.val;
+//            left.val = right.val;
+//            right.val = temp;
+//        }
+//        helper(left.left, right.right, level+1);
+//        helper(left.right,right.left, level+1);
+//    }
+
+
+
+    int count=0;
+    public int averageOfSubtree(TreeNode root) {
+        if(root==null)return 0;
+        helper(root);
+        return count;
     }
-    private void helper(TreeNode left, TreeNode right, int level){
-        if(left==null||right==null)return ;
-        if(level%2==0){
-            int temp = left.val;
-            left.val = right.val;
-            right.val = temp;
-        }
-        helper(left.left, right.right, level+1);
-        helper(left.right,right.left, level+1);
+    public int[] helper(TreeNode root){
+        if(root==null)return new int[]{0,0};
+        int []leftSubtree = helper(root.left);
+        int []rightSubtree = helper(root.right);
+        int totalForLevel = leftSubtree[0]+rightSubtree[0]+ root.val;
+        int noOfNodes =leftSubtree[1]+rightSubtree[1]+1;
+        if(totalForLevel/noOfNodes==root.val)count++;
+        return new int[]{totalForLevel,noOfNodes};
     }
 
 
