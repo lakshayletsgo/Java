@@ -326,20 +326,60 @@ public class PracticeReLeetCode {
 
 
 
-    int count=0;
-    public int averageOfSubtree(TreeNode root) {
-        if(root==null)return 0;
-        helper(root);
-        return count;
+//    int count=0;
+//    public int averageOfSubtree(TreeNode root) {
+//        if(root==null)return 0;
+//        helper(root);
+//        return count;
+//    }
+//    public int[] helper(TreeNode root){
+//        if(root==null)return new int[]{0,0};
+//        int []leftSubtree = helper(root.left);
+//        int []rightSubtree = helper(root.right);
+//        int totalForLevel = leftSubtree[0]+rightSubtree[0]+ root.val;
+//        int noOfNodes =leftSubtree[1]+rightSubtree[1]+1;
+//        if(totalForLevel/noOfNodes==root.val)count++;
+//        return new int[]{totalForLevel,noOfNodes};
+//    }
+
+
+
+
+    private int sumAtLastLevel = 0;
+    public int deepestLeavesSum(TreeNode root) {
+        if (root==null){
+            return 0;
+        }
+        sumAtEachLevel(root);
+        return sumAtLastLevel;
     }
-    public int[] helper(TreeNode root){
-        if(root==null)return new int[]{0,0};
-        int []leftSubtree = helper(root.left);
-        int []rightSubtree = helper(root.right);
-        int totalForLevel = leftSubtree[0]+rightSubtree[0]+ root.val;
-        int noOfNodes =leftSubtree[1]+rightSubtree[1]+1;
-        if(totalForLevel/noOfNodes==root.val)count++;
-        return new int[]{totalForLevel,noOfNodes};
+
+    private void sumAtEachLevel(TreeNode root) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()){
+            int levelSize = queue.size();
+            List<TreeNode> level = new ArrayList<>();
+            for (int i=0;i<levelSize;i++){
+                TreeNode curr = queue.poll();
+                level.add(curr);
+                if (curr.left!=null){
+                    queue.add(curr.left);
+                }
+                if (curr.right!=null){
+                    queue.add(curr.right);
+                }
+            }
+            sumAtLastLevel = getSumOfList(level);
+        }
+    }
+
+    private int getSumOfList(List<TreeNode> level) {
+        int sum = 0;
+        for (TreeNode curr:level){
+            sum+=curr.val;
+        }
+        return sum;
     }
 
 
