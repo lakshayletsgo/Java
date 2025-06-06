@@ -345,41 +345,73 @@ public class PracticeReLeetCode {
 
 
 
-    private int sumAtLastLevel = 0;
-    public int deepestLeavesSum(TreeNode root) {
-        if (root==null){
-            return 0;
-        }
-        sumAtEachLevel(root);
-        return sumAtLastLevel;
-    }
+//    private int sumAtLastLevel = 0;
+//    public int deepestLeavesSum(TreeNode root) {
+//        if (root==null){
+//            return 0;
+//        }
+//        sumAtEachLevel(root);
+//        return sumAtLastLevel;
+//    }
+//
+//    private void sumAtEachLevel(TreeNode root) {
+//        Queue<TreeNode> queue = new LinkedList<>();
+//        queue.add(root);
+//        while (!queue.isEmpty()){
+//            int levelSize = queue.size();
+//            List<TreeNode> level = new ArrayList<>();
+//            for (int i=0;i<levelSize;i++){
+//                TreeNode curr = queue.poll();
+//                level.add(curr);
+//                if (curr.left!=null){
+//                    queue.add(curr.left);
+//                }
+//                if (curr.right!=null){
+//                    queue.add(curr.right);
+//                }
+//            }
+//            sumAtLastLevel = getSumOfList(level);
+//        }
+//    }
+//
+//    private int getSumOfList(List<TreeNode> level) {
+//        int sum = 0;
+//        for (TreeNode curr:level){
+//            sum+=curr.val;
+//        }
+//        return sum;
+//    }
 
-    private void sumAtEachLevel(TreeNode root) {
-        Queue<TreeNode> queue = new LinkedList<>();
-        queue.add(root);
-        while (!queue.isEmpty()){
-            int levelSize = queue.size();
-            List<TreeNode> level = new ArrayList<>();
-            for (int i=0;i<levelSize;i++){
-                TreeNode curr = queue.poll();
-                level.add(curr);
-                if (curr.left!=null){
-                    queue.add(curr.left);
-                }
-                if (curr.right!=null){
-                    queue.add(curr.right);
-                }
+
+
+
+
+    public TreeNode constructMaximumBinaryTree(int[] nums) {
+        return helper(nums,0,nums.length);
+    }
+    private TreeNode helper(int[]nums,int start,int end){
+        if(start>=end)return null;
+        int[]maxVal = getMax(nums,start,end);
+        int maxInd = maxVal[1];
+        TreeNode root = new TreeNode(nums[maxInd]);
+        if(maxInd==0)root.right = helper(nums,maxInd+1,end);
+        else if(maxInd==nums.length-1)root.left=helper(nums,start,maxInd);
+        else{
+            root.left = helper(nums,start,maxInd);
+            root.right=helper(nums,maxInd+1,end);
+        }
+        return root;
+    }
+    private int[] getMax(int[]nums,int start, int end){
+        int maxInd = 0;
+        int max = Integer.MIN_VALUE;
+        for(int i=start;i<end;i++){
+            if(max<nums[i]){
+                max = nums[i];
+                maxInd = i;
             }
-            sumAtLastLevel = getSumOfList(level);
         }
-    }
-
-    private int getSumOfList(List<TreeNode> level) {
-        int sum = 0;
-        for (TreeNode curr:level){
-            sum+=curr.val;
-        }
-        return sum;
+        return new int[]{max,maxInd};
     }
 
 
