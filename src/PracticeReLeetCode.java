@@ -386,34 +386,69 @@ public class PracticeReLeetCode {
 
 
 
-    public TreeNode constructMaximumBinaryTree(int[] nums) {
-        return helper(nums,0,nums.length);
-    }
-    private TreeNode helper(int[]nums,int start,int end){
-        if(start>=end)return null;
-        int[]maxVal = getMax(nums,start,end);
-        int maxInd = maxVal[1];
-        TreeNode root = new TreeNode(nums[maxInd]);
-        if(maxInd==0)root.right = helper(nums,maxInd+1,end);
-        else if(maxInd==nums.length-1)root.left=helper(nums,start,maxInd);
-        else{
-            root.left = helper(nums,start,maxInd);
-            root.right=helper(nums,maxInd+1,end);
+//    public TreeNode constructMaximumBinaryTree(int[] nums) {
+//        return helper(nums,0,nums.length);
+//    }
+//    private TreeNode helper(int[]nums,int start,int end){
+//        if(start>=end)return null;
+//        int[]maxVal = getMax(nums,start,end);
+//        int maxInd = maxVal[1];
+//        TreeNode root = new TreeNode(nums[maxInd]);
+//        if(maxInd==0)root.right = helper(nums,maxInd+1,end);
+//        else if(maxInd==nums.length-1)root.left=helper(nums,start,maxInd);
+//        else{
+//            root.left = helper(nums,start,maxInd);
+//            root.right=helper(nums,maxInd+1,end);
+//        }
+//        return root;
+//    }
+//    private int[] getMax(int[]nums,int start, int end){
+//        int maxInd = 0;
+//        int max = Integer.MIN_VALUE;
+//        for(int i=start;i<end;i++){
+//            if(max<nums[i]){
+//                max = nums[i];
+//                maxInd = i;
+//            }
+//        }
+//        return new int[]{max,maxInd};
+//    }
+
+
+
+
+    private class Pair{
+        TreeNode key;
+        int val;
+        Pair(TreeNode key, int val){
+            this.key = key;
+            this.val = val;
         }
-        return root;
+        public TreeNode getKey() {return key;}
+        public int getVal() {return val;}
     }
-    private int[] getMax(int[]nums,int start, int end){
-        int maxInd = 0;
-        int max = Integer.MIN_VALUE;
-        for(int i=start;i<end;i++){
-            if(max<nums[i]){
-                max = nums[i];
-                maxInd = i;
+    public int sumEvenGrandparent(TreeNode root) {
+        Queue<Pair> queue = new LinkedList<>();
+        queue.offer(new Pair(root,-1));
+        int sum = 0;
+        while(!queue.isEmpty()){
+            int size = queue.size();
+            for(int i=0;i<size;i++){
+                Pair curr = queue.poll();
+                int val = curr.getVal();
+                TreeNode key = curr.getKey();
+                if(key.left!=null){
+                    if(val%2==0)sum+=key.left.val;
+                    queue.add(new Pair(key.left,key.val));
+                }
+                if(key.right!=null){
+                    if(val%2==0)sum+=key.right.val;
+                    queue.add(new Pair(key.right,key.val));
+                }
             }
         }
-        return new int[]{max,maxInd};
+        return sum;
     }
-
 
 }
 
