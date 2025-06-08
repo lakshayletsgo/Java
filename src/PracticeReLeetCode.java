@@ -416,40 +416,61 @@ public class PracticeReLeetCode {
 
 
 
+//
+//    private class Pair{
+//        TreeNode key;
+//        int val;
+//        Pair(TreeNode key, int val){
+//            this.key = key;
+//            this.val = val;
+//        }
+//        public TreeNode getKey() {return key;}
+//        public int getVal() {return val;}
+//    }
+//    public int sumEvenGrandparent(TreeNode root) {
+//        Queue<Pair> queue = new LinkedList<>();
+//        queue.offer(new Pair(root,-1));
+//        int sum = 0;
+//        while(!queue.isEmpty()){
+//            int size = queue.size();
+//            for(int i=0;i<size;i++){
+//                Pair curr = queue.poll();
+//                int val = curr.getVal();
+//                TreeNode key = curr.getKey();
+//                if(key.left!=null){
+//                    if(val%2==0)sum+=key.left.val;
+//                    queue.add(new Pair(key.left,key.val));
+//                }
+//                if(key.right!=null){
+//                    if(val%2==0)sum+=key.right.val;
+//                    queue.add(new Pair(key.right,key.val));
+//                }
+//            }
+//        }
+//        return sum;
+//    }
 
-    private class Pair{
-        TreeNode key;
-        int val;
-        Pair(TreeNode key, int val){
-            this.key = key;
-            this.val = val;
-        }
-        public TreeNode getKey() {return key;}
-        public int getVal() {return val;}
-    }
-    public int sumEvenGrandparent(TreeNode root) {
-        Queue<Pair> queue = new LinkedList<>();
-        queue.offer(new Pair(root,-1));
-        int sum = 0;
-        while(!queue.isEmpty()){
-            int size = queue.size();
-            for(int i=0;i<size;i++){
-                Pair curr = queue.poll();
-                int val = curr.getVal();
-                TreeNode key = curr.getKey();
-                if(key.left!=null){
-                    if(val%2==0)sum+=key.left.val;
-                    queue.add(new Pair(key.left,key.val));
-                }
-                if(key.right!=null){
-                    if(val%2==0)sum+=key.right.val;
-                    queue.add(new Pair(key.right,key.val));
-                }
-            }
-        }
-        return sum;
-    }
 
+
+    public TreeNode balanceBST(TreeNode root) {
+        List<Integer>list = new ArrayList<>();
+        getValuesOrder(root,list);
+        return balanceTree(list,0,list.size()-1);
+    }
+    private void getValuesOrder(TreeNode root, List<Integer>list){
+        if(root==null)return;
+        getValuesOrder(root.left,list);
+        list.add(root.val);
+        getValuesOrder(root.right,list);
+    }
+    private TreeNode balanceTree( List<Integer> list,int s,int e){
+        if(s>e)return null;
+        int mid = (s+e)/2;
+        TreeNode root = new TreeNode(list.get(mid));
+        root.left = balanceTree(list,s,mid-1);
+        root.right = balanceTree(list,mid+1,e);
+        return root;
+    }
 }
 
 
