@@ -452,23 +452,38 @@ public class PracticeReLeetCode {
 
 
 
-    public TreeNode balanceBST(TreeNode root) {
-        List<Integer>list = new ArrayList<>();
-        getValuesOrder(root,list);
-        return balanceTree(list,0,list.size()-1);
+//    public TreeNode balanceBST(TreeNode root) {
+//        List<Integer>list = new ArrayList<>();
+//        getValuesOrder(root,list);
+//        return balanceTree(list,0,list.size()-1);
+//    }
+//    private void getValuesOrder(TreeNode root, List<Integer>list){
+//        if(root==null)return;
+//        getValuesOrder(root.left,list);
+//        list.add(root.val);
+//        getValuesOrder(root.right,list);
+//    }
+//    private TreeNode balanceTree( List<Integer> list,int s,int e){
+//        if(s>e)return null;
+//        int mid = (s+e)/2;
+//        TreeNode root = new TreeNode(list.get(mid));
+//        root.left = balanceTree(list,s,mid-1);
+//        root.right = balanceTree(list,mid+1,e);
+//        return root;
+//    }
+
+
+
+
+    public TreeNode bstFromPreorder(int[] preorder) {
+        TreeNode root = null;
+        for(int i:preorder)root=insertNode(root,i);
+        return root;
     }
-    private void getValuesOrder(TreeNode root, List<Integer>list){
-        if(root==null)return;
-        getValuesOrder(root.left,list);
-        list.add(root.val);
-        getValuesOrder(root.right,list);
-    }
-    private TreeNode balanceTree( List<Integer> list,int s,int e){
-        if(s>e)return null;
-        int mid = (s+e)/2;
-        TreeNode root = new TreeNode(list.get(mid));
-        root.left = balanceTree(list,s,mid-1);
-        root.right = balanceTree(list,mid+1,e);
+    private TreeNode insertNode(TreeNode root,int i){
+        if(root==null)return new TreeNode(i);
+        if(root.val>i)root.left = insertNode(root.left,i);
+        if(root.val<i)root.right = insertNode(root.right,i);
         return root;
     }
 }
