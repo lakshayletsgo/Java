@@ -475,16 +475,39 @@ public class PracticeReLeetCode {
 
 
 
-    public TreeNode bstFromPreorder(int[] preorder) {
-        TreeNode root = null;
-        for(int i:preorder)root=insertNode(root,i);
-        return root;
-    }
-    private TreeNode insertNode(TreeNode root,int i){
-        if(root==null)return new TreeNode(i);
-        if(root.val>i)root.left = insertNode(root.left,i);
-        if(root.val<i)root.right = insertNode(root.right,i);
-        return root;
+//    public TreeNode bstFromPreorder(int[] preorder) {
+//        TreeNode root = null;
+//        for(int i:preorder)root=insertNode(root,i);
+//        return root;
+//    }
+//    private TreeNode insertNode(TreeNode root,int i){
+//        if(root==null)return new TreeNode(i);
+//        if(root.val>i)root.left = insertNode(root.left,i);
+//        if(root.val<i)root.right = insertNode(root.right,i);
+//        return root;
+//    }
+
+
+
+    private HashMap<Integer, List<TreeNode>> map = new HashMap<>();
+    public List<TreeNode> allPossibleFBT(int n) {
+        List<TreeNode> ans = new ArrayList<>();
+        if(n==1)ans.add(new TreeNode(0));
+        else if(n%2==1){
+            for(int i=0;i<n;i++){
+                int j = n-1-i;
+                for(TreeNode left:allPossibleFBT(i)){
+                    for(TreeNode right:allPossibleFBT(j)){
+                        TreeNode root = new TreeNode(0);
+                        root.left = left;
+                        root.right = right;
+                        ans.add(root);
+                    }
+                }
+            }
+        }
+        map.put(n,ans);
+        return map.get(n);
     }
 }
 
