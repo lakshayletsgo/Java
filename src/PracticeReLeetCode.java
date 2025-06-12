@@ -489,25 +489,55 @@ public class PracticeReLeetCode {
 
 
 
-    private HashMap<Integer, List<TreeNode>> map = new HashMap<>();
-    public List<TreeNode> allPossibleFBT(int n) {
-        List<TreeNode> ans = new ArrayList<>();
-        if(n==1)ans.add(new TreeNode(0));
-        else if(n%2==1){
-            for(int i=0;i<n;i++){
-                int j = n-1-i;
-                for(TreeNode left:allPossibleFBT(i)){
-                    for(TreeNode right:allPossibleFBT(j)){
-                        TreeNode root = new TreeNode(0);
-                        root.left = left;
-                        root.right = right;
-                        ans.add(root);
-                    }
-                }
+//    private HashMap<Integer, List<TreeNode>> map = new HashMap<>();
+//    public List<TreeNode> allPossibleFBT(int n) {
+//        List<TreeNode> ans = new ArrayList<>();
+//        if(n==1)ans.add(new TreeNode(0));
+//        else if(n%2==1){
+//            for(int i=0;i<n;i++){
+//                int j = n-1-i;
+//                for(TreeNode left:allPossibleFBT(i)){
+//                    for(TreeNode right:allPossibleFBT(j)){
+//                        TreeNode root = new TreeNode(0);
+//                        root.left = left;
+//                        root.right = right;
+//                        ans.add(root);
+//                    }
+//                }
+//            }
+//        }
+//        map.put(n,ans);
+//        return map.get(n);
+//    }
+
+
+
+
+
+
+    Map<Integer,TreeNode> map = new HashMap<>();
+    Set<Integer> set = new HashSet<>();
+    public TreeNode createBinaryTree(int[][] descriptions) {
+        for(int []level:descriptions){
+            TreeNode curr = map.getOrDefault(level[0],new TreeNode(level[0]));
+            set.add(level[1]);
+            if(level[2]==1){
+                curr.left = map.getOrDefault(level[1],new TreeNode(level[1]));
+                map.put(level[1],curr.left);
+            }else{
+                curr.right = map.getOrDefault(level[1],new TreeNode(level[1]));
+                map.put(level[1],curr.right);
+            }
+            map.put(level[0],curr);
+        }
+        int root = -1;
+        for(int []level:descriptions){
+            if(!set.contains(level[0])){
+                root = level[0];
+                break;
             }
         }
-        map.put(n,ans);
-        return map.get(n);
+        return map.getOrDefault(root,null);
     }
 }
 
