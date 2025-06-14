@@ -515,29 +515,50 @@ public class PracticeReLeetCode {
 
 
 
-    Map<Integer,TreeNode> map = new HashMap<>();
-    Set<Integer> set = new HashSet<>();
-    public TreeNode createBinaryTree(int[][] descriptions) {
-        for(int []level:descriptions){
-            TreeNode curr = map.getOrDefault(level[0],new TreeNode(level[0]));
-            set.add(level[1]);
-            if(level[2]==1){
-                curr.left = map.getOrDefault(level[1],new TreeNode(level[1]));
-                map.put(level[1],curr.left);
-            }else{
-                curr.right = map.getOrDefault(level[1],new TreeNode(level[1]));
-                map.put(level[1],curr.right);
-            }
-            map.put(level[0],curr);
-        }
-        int root = -1;
-        for(int []level:descriptions){
-            if(!set.contains(level[0])){
-                root = level[0];
-                break;
-            }
-        }
-        return map.getOrDefault(root,null);
+//    Map<Integer,TreeNode> map = new HashMap<>();
+//    Set<Integer> set = new HashSet<>();
+//    public TreeNode createBinaryTree(int[][] descriptions) {
+//        for(int []level:descriptions){
+//            TreeNode curr = map.getOrDefault(level[0],new TreeNode(level[0]));
+//            set.add(level[1]);
+//            if(level[2]==1){
+//                curr.left = map.getOrDefault(level[1],new TreeNode(level[1]));
+//                map.put(level[1],curr.left);
+//            }else{
+//                curr.right = map.getOrDefault(level[1],new TreeNode(level[1]));
+//                map.put(level[1],curr.right);
+//            }
+//            map.put(level[0],curr);
+//        }
+//        int root = -1;
+//        for(int []level:descriptions){
+//            if(!set.contains(level[0])){
+//                root = level[0];
+//                break;
+//            }
+//        }
+//        return map.getOrDefault(root,null);
+//    }
+
+
+
+
+    public List<Integer> getAllElements(TreeNode root1, TreeNode root2) {
+        List<Integer> list1 = new ArrayList<>();
+        List<Integer> list2 = new ArrayList<>();
+        List<Integer> ans = new ArrayList<>();
+        inorder(root1,list1);
+        inorder(root2,list2);
+        ans.addAll(list1);
+        ans.addAll(list2);
+        Collections.sort(ans);
+        return ans;
+    }
+    private void inorder(TreeNode root, List<Integer> list){
+        if(root==null)return;
+        inorder(root.left,list);
+        list.add(root.val);
+        inorder(root.right,list);
     }
 }
 
