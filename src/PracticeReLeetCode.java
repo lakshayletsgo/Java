@@ -543,22 +543,41 @@ public class PracticeReLeetCode {
 
 
 
-    public List<Integer> getAllElements(TreeNode root1, TreeNode root2) {
-        List<Integer> list1 = new ArrayList<>();
-        List<Integer> list2 = new ArrayList<>();
-        List<Integer> ans = new ArrayList<>();
-        inorder(root1,list1);
-        inorder(root2,list2);
-        ans.addAll(list1);
-        ans.addAll(list2);
-        Collections.sort(ans);
-        return ans;
+//    public List<Integer> getAllElements(TreeNode root1, TreeNode root2) {
+//        List<Integer> list1 = new ArrayList<>();
+//        List<Integer> list2 = new ArrayList<>();
+//        List<Integer> ans = new ArrayList<>();
+//        inorder(root1,list1);
+//        inorder(root2,list2);
+//        ans.addAll(list1);
+//        ans.addAll(list2);
+//        Collections.sort(ans);
+//        return ans;
+//    }
+//    private void inorder(TreeNode root, List<Integer> list){
+//        if(root==null)return;
+//        inorder(root.left,list);
+//        list.add(root.val);
+//        inorder(root.right,list);
+//    }
+
+
+
+
+
+    int maxDiff = 0;
+    public int maxAncestorDiff(TreeNode root) {
+        if(root==null)return 0;
+        helper(root,root.val,root.val);
+        return maxDiff;
     }
-    private void inorder(TreeNode root, List<Integer> list){
+    public void helper(TreeNode root, int val, int val1){
         if(root==null)return;
-        inorder(root.left,list);
-        list.add(root.val);
-        inorder(root.right,list);
+        maxDiff = Math.max(maxDiff, Math.max(Math.abs(val-root.val),Math.abs(val1-root.val)));
+        val = Math.min(root.val,val);
+        val1 = Math.max(root.val,val1);
+        helper(root.left, val,val1);
+        helper(root.right,val,val1);
     }
 }
 
