@@ -563,21 +563,31 @@ public class PracticeReLeetCode {
 
 
 
+//
+//
+//    int maxDiff = 0;
+//    public int maxAncestorDiff(TreeNode root) {
+//        if(root==null)return 0;
+//        helper(root,root.val,root.val);
+//        return maxDiff;
+//    }
+//    public void helper(TreeNode root, int val, int val1){
+//        if(root==null)return;
+//        maxDiff = Math.max(maxDiff, Math.max(Math.abs(val-root.val),Math.abs(val1-root.val)));
+//        val = Math.min(root.val,val);
+//        val1 = Math.max(root.val,val1);
+//        helper(root.left, val,val1);
+//        helper(root.right,val,val1);
+//    }
 
 
-    int maxDiff = 0;
-    public int maxAncestorDiff(TreeNode root) {
-        if(root==null)return 0;
-        helper(root,root.val,root.val);
-        return maxDiff;
-    }
-    public void helper(TreeNode root, int val, int val1){
-        if(root==null)return;
-        maxDiff = Math.max(maxDiff, Math.max(Math.abs(val-root.val),Math.abs(val1-root.val)));
-        val = Math.min(root.val,val);
-        val1 = Math.max(root.val,val1);
-        helper(root.left, val,val1);
-        helper(root.right,val,val1);
+
+    public TreeNode removeLeafNodes(TreeNode root, int target) {
+        if (root==null)return null;
+        root.left =  removeLeafNodes(root.left,target);
+        root.right =  removeLeafNodes(root.right,target);
+        if (root.right==null&&root.left==null&&root.val==target)return null;
+        return root;
     }
 }
 
