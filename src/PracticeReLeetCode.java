@@ -581,14 +581,48 @@ public class PracticeReLeetCode {
 //    }
 
 
-
-    public TreeNode removeLeafNodes(TreeNode root, int target) {
-        if (root==null)return null;
-        root.left =  removeLeafNodes(root.left,target);
-        root.right =  removeLeafNodes(root.right,target);
-        if (root.right==null&&root.left==null&&root.val==target)return null;
-        return root;
+//    public TreeNode removeLeafNodes(TreeNode root, int target) {
+//        if (root==null)return null;
+//        root.left =  removeLeafNodes(root.left,target);
+//        root.right =  removeLeafNodes(root.right,target);
+//        if (root.right==null&&root.left==null&&root.val==target)return null;
+//        return root;
+//    }
+class FindElements {
+    TreeNode root ;
+    public FindElements(TreeNode root) {
+        this.root = root;
+        Queue<TreeNode> queue = new LinkedList<>();
+        this.root.val = 0;
+        queue.add(this.root);
+        while (!queue.isEmpty()){
+            int level = queue.size();
+            for (int i = 0; i < level; i++) {
+                TreeNode temp = queue.poll();
+                if (temp.left!=null){
+                    temp.left.val = 2*temp.val+1;
+                    queue.add(temp.left);
+                }
+                if (temp.right!=null){
+                    temp.right.val = 2*temp.val+2;
+                    queue.add(temp.right);
+                }
+            }
+        }
     }
+
+    public boolean find(int target) {
+        return helper(target,root);
+    }
+
+    private boolean helper(int target, TreeNode root) {
+        if (root==null){
+            return false;
+        }
+        if (root.val==target){return true;}
+        return helper(target,root.left)||helper(target,root.right);
+    }
+}
 }
 
 
