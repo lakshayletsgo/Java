@@ -6,7 +6,7 @@ public class App {
 
     public static void main(String[] args)throws Exception {
 
-        int boardWidth = 600;
+        int boardWidth = 700;
         int boardHeight = boardWidth;
 
         JFrame frame = new JFrame("Snake");
