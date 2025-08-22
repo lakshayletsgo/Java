@@ -16,7 +16,6 @@ public class Top150_125 {
                 carry = sum / 2;
                 i--;
                 j--;
-
                 sb.append((char)(digit + '0'));
             }
 
