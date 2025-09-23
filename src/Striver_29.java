@@ -1,3 +1,4 @@
+import java.util.*;
 public class Striver_29 {
     public List<List<String>> solveNQueens(int n) {
         List<List<String>> ans = new ArrayList<>();
